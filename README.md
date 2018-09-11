@@ -171,7 +171,7 @@ ELSE
 END IF
 ```
 
-####Mode 1: Heading control
+Mode 1: Heading control
 - Get compass difference as percentage of max difference
 - Get front compass reading
 - Compute heading difference between front heading reading and target heading
