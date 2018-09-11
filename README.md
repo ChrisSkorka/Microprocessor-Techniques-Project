@@ -1,7 +1,7 @@
 # Microprocessor-Techniques-Project
 Major project for microprocessor techniques. Remote controlled walking Lego robot.
 
-Requirements
+##Requirements
 - Phone app
   - Flutter app
   - Buttons for control
@@ -27,7 +27,7 @@ Requirements
   - IR reciever/motor controller
   - Walking mechanisim
 
-Microprocessor Software design
+##Microprocessor Software design
 - Interrupt timer (10Hz) - read compass and update heading
   - Read compass reading and compare to determine heading/steering
   - Calculate required steering speed
@@ -43,6 +43,8 @@ Microprocessor Software design
   - Update heading variable
   - Update walking speed variable
 - Main program - setup above and then nothing
+
+##Technical Details
 
 ###IR code transmission
 Clock: 38kHz
@@ -150,3 +152,43 @@ speed
 dir - direction
 heading degree = dir * (360/32)
 accurate to 11.25 degrees
+
+##Decission Making
+###Determine Steering Motor Speed
+Mode 0: Direct steering
+- Get compass difference as percentage of max difference
+- Get steering percentage
+- Compute difference
+- Set steering motor speed corresponding to difference
+
+```
+steering = (front_heading - back_heading) / max_steering
+difference = target_steering - steering
+IF absolute difference < 5%:
+  motor_speed = 0%
+ELSE
+  motor_speed = 100% in direction of target_steering
+END IF
+```
+
+####Mode 1: Heading control
+- Get compass difference as percentage of max difference
+- Get front compass reading
+- Compute heading difference between front heading reading and target heading
+- If heading is not similar (with in 10 degrees)
+  - If robot is not already max steering
+  - Motor speed is max in required direction
+
+```
+steering = (front_heading - back_heading) / max_steering
+difference = target_heading - front_heading
+IF absolute difference > 10 degrees:
+  IF steering close to 100% in direction of difference:
+    motor_speed = 0
+  ELSE
+    motor_speed = max in direction of difference
+  END IF
+ELSE
+  motor_speed = 0
+END IF
+```
