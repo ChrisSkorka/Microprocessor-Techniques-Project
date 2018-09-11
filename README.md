@@ -193,3 +193,13 @@ ELSE
   motor_speed = 0
 END IF
 ```
+
+##Pin connections
+| System         | FunctionID | Pins      | Mode   |
+|----------------|------------|-----------|--------|
+| Timer 1 IR LED | T0         | PB6, -PB7 | Output |
+| Timer 2        | T1         | PB4, -PB5 | Input  |
+| Timer 3        | T2         | PB0, -PB1 | Input  |
+| I2C Compass 1  | I2C0       | PB2, PB3  | IO     |
+| I2C Compass 2  | I2C1       | PA6, PA7  | IO     |
+| UART Bluetooth | U1         | PC4, PC5  | IO     |
