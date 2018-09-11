@@ -69,6 +69,7 @@ Max bits to transmit: 174
 ###IR codes
 16 bit message + start/stop bit:
 | start | Toggle | Escape | Channel1 | Channel1 | Address | 1 | Mode | Output | D3 | D2 | D1 | D0 | L3 | L2 | L1 | L0 | stop |
+|-------|--------|--------|----------|----------|---------|---|------|-------|----|----|----|----|----|----|----|----|------|
 
 Relevant bits that change for each transmission
 Output: select motor A or B
