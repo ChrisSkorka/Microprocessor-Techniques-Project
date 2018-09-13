@@ -48,6 +48,7 @@ Major project for microprocessor techniques. Remote controlled walking Lego robo
 
 ###IR code transmission
 Clock: 38kHz
+
 | bit   | high cycles | low cycles |
 |-------|-------------|------------|
 | start | 6           | 39         |
@@ -58,6 +59,7 @@ Max bits to transmit: 522
 
 EXPERIMENTAL: the clock cycle can possible be reduced to a third, reciever should be able to interpret slighlty off timing
 Clock: 12.666kHz
+
 | bit   | high cycles | low cycles |
 |-------|-------------|------------|
 | start | 2           | 13         |
@@ -67,6 +69,7 @@ Clock: 12.666kHz
 Max bits to transmit: 174
 
 ###IR codes
+
 16 bit message + start/stop bit:
 | start | Toggle | Escape | Channel1 | Channel1 | Address | 1 | Mode | Output | D3 | D2 | D1 | D0 | L3 | L2 | L1 | L0 | stop |
 |-------|--------|--------|----------|----------|---------|---|------|-------|----|----|----|----|----|----|----|----|------|
@@ -77,6 +80,7 @@ D: Data (speed)
 L: LRC (redundency check)
 
 Each message bit is represented by 2 bits in memory
+
 | value | bit   | high | low |
 |-------|-------|------|-----|
 | 00    | low   | 6    | 10  |
@@ -96,17 +100,20 @@ Message ends after processing 72 bits
 ###UART Commands (8bit):
 
 mode:
+
 | value | meaning      |
 |-------|--------------|
 | 0     | direct mode  |
 | 1     | heading mode |
 
 Mode direct (0), phone sends whether to steer left or right:
+
 | bit     | 7    | 6      | 5      | 4      | 3      | 2    | 1    | 0    |
 |---------|------|--------|--------|--------|--------|------|------|------|
 | purpose | mode | speed3 | speed2 | speed1 | speed0 | dir2 | dir1 | dir0 |
 
 speed
+
 | value | direction  | speed |
 |-------|------------|-------|
 | 0000  | stationary | 0%    |
@@ -128,6 +135,7 @@ speed
 | 1110  | backwards  | 100%  |
 
 dir - direction
+
 | value | direction | degree |
 |-------|-----------|--------|
 | 000   | streight  |        |
@@ -139,11 +147,13 @@ dir - direction
 | 111   | right     | 100%   |
 
 Mode heading (1), phone sends compass heading to follow:
+
 | bit     | 7     | 6       | 5       | 4    | 3    | 2    | 1    | 0    |
 |---------|-------|---------|---------|------|------|------|------|------|
 | purpose | mode  | speed1  | speed0  | dir4 | dir3 | dir2 | dir1 | dir0 |
 
 speed
+
 | value | direction  | speed |
 |-------|------------|-------|
 | 00    | stationary | 0%    |
@@ -195,6 +205,7 @@ END IF
 ```
 
 ##Pin connections
+
 | System         | FunctionID | Pins      | Mode   |
 |----------------|------------|-----------|--------|
 | Timer 1 IR LED | T0         | PB6, -PB7 | Output |
