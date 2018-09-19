@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lego_controller_app/VerticalSlider.dart';
 
 // void main() => runApp(new MyApp());
 void main(){
@@ -107,7 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               )
             ),
-          )
+          ),
+          new Container(
+            padding: EdgeInsets.all(25.0),
+            alignment: Alignment.center,
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                new VerticalSlider(
+                  onUpdate: null,
+                ),
+              ]
+            ),
+          ),
         ]
       ),
     );
