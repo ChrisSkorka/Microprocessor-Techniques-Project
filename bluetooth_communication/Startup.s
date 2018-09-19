@@ -71,6 +71,8 @@ __heap_limit
         EXPORT  __Vectors
         EXPORT  __Vectors_End
         EXPORT  __Vectors_Size
+		IMPORT bluetoothISR
+		
 		
 __Vectors
         DCD     __initial_sp              ; Top of Stack
@@ -96,7 +98,7 @@ __Vectors
         DCD     GPIOD_Handler             ;   3: GPIO Port D
         DCD     GPIOE_Handler             ;   4: GPIO Port E
         DCD     UART0_Handler             ;   5: UART0 Rx and Tx
-        DCD     UART1_Handler             ;   6: UART1 Rx and Tx
+        DCD     bluetoothISR ; UART1_Handler             ;   6: UART1 Rx and Tx bluetoothISR
         DCD     SSI0_Handler              ;   7: SSI0 Rx and Tx
         DCD     I2C0_Handler              ;   8: I2C0 Master and Slave
         DCD     PWM0_FAULT_Handler        ;   9: PWM Fault
