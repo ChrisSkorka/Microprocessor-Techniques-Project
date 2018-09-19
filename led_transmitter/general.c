@@ -69,7 +69,7 @@ void setupSysTick(void){
 	
 	// set reload
 	NVIC_ST_RELOAD = 0xFFFFFF;
-	NVIC_ST_CURRENT = 0x8FFFFF;
+	NVIC_ST_CURRENT = 0x00;
 	
 	// set source
 	NVIC_ST_CTRL |= 0x04;
