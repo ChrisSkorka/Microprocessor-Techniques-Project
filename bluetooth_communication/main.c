@@ -17,19 +17,19 @@ int main(void){
 	setupUARTforBluetooth();
 	setupBluetoothInterrupt();
 	
-//	while(1){
-//		Delay(100);
-//		writeUSB(' ');
-//	}
-	
 	while(1){
+		Delay(100);
+		writeUSB(' ');
+	}
+	
+//	while(1){
 //		char c = readBluetooth();
 //		writeBluetooth(c);
 //		writeUSB(c);
-		char c = readUSB();
-		writeUSB(c);
-		writeBluetooth(c);
-	}
+//		char c = readUSB();
+//		writeUSB(c);
+////		writeBluetooth(c);
+//	}
 	
 //	while(1);
 }

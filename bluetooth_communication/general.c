@@ -8,6 +8,9 @@ char readBluetooth(void);
 void writeBluetooth(char c);
 void setupBluetoothInterrupt(void);
 void bluetoothISR(void);
+void processBluetoothCommand(char command);
+void printNum(int num);
+void printString(char* str);
 
 extern void DisableInterrupts(void);
 extern void EnableInterrupts(void);
@@ -19,6 +22,11 @@ void Delay(unsigned int numLoops){
 	for(lp=0; lp<numLoops; lp++)
 		for (i=0; i<=0xFFFF; i++) ;
 }
+
+char mode = 0;
+char speed = 0;
+char direction = 0;
+char targetHeading = 0;
 
 // configure UART0 on port A pins 0 and 1
 void setupUARTforUSB(void){
@@ -34,9 +42,9 @@ void setupUARTforUSB(void){
 	// diable UART
 	UART0_CTL &=~ 0x01;
 	
-	// set baud rate: 38400, I=26, F=3
-	UART0_IBRD = 26;
-	UART0_FBRD = 3;
+	// set baud rate: 9600, I=104, F=11
+	UART0_IBRD = 104;
+	UART0_FBRD = 11;
 	
 	// set line control parameters: 8bits, no parity, 1 stop bit
 	UART0_LCRH &=~ 0x0E;
@@ -77,9 +85,6 @@ void setupUARTforBluetooth(void){
 	// set baud rate: 9600, I=104, F=11
 	UART1_IBRD = 104;
 	UART1_FBRD = 11;
-	// set baud rate: 38400, I=26, F=3
-//	UART1_IBRD = 26;
-//	UART1_FBRD = 3;
 	
 	// set line control parameters: 8bits, no parity, 1 stop bit
 	UART1_LCRH &=~ 0x0E;
@@ -109,7 +114,7 @@ void setupBluetoothInterrupt(void){
 	
 	// disable all interrupts
 	// CPSID();
-	enable
+	DisableInterrupts();
 	
 	// set interrupt FIFO level = 1
 	UART1_IFLS &=~ 0x28;
@@ -126,18 +131,89 @@ void setupBluetoothInterrupt(void){
 	NVIC_PRI1 |= (unsigned)(0x1) << 13;
 	
 	// set interrupt service routine
-	
+	// done in startup.s
 	
 	// enable all interrupts
 	// CPSIE();
+	EnableInterrupts();
 	
 }
 
 // bluetooth recieve interrupt handler
 void bluetoothISR(void){
-	writeUSB('X');
+	
+	// read command and process it
+	char c = readBluetooth();
+	processBluetoothCommand(c);
 	
 	// clear interrupt status
+	UART1_ICR |= 0x10;
+	
+}
+
+// processes a bluetooth UART command and decodes it
+void processBluetoothCommand(char command){
+	
+	// get mode
+	mode = command & 0x80;
+	
+	if(mode){
+		// if direct mode
+		
+		// get speed
+		speed = command >> 3 & 0xF;
+		
+		// get direction
+		direction = command & 0x7;
+		
+	}else{
+		// heading mode
+		
+		// map from 2 bits to 4 bits
+		char speedMap[] = {0, 0x7, 0, 0xF};
+
+		// get speed
+		speed = speedMap[command >> 5 & 0x3];
+		
+		// get heading
+		targetHeading = command & 0x1F;
+		
+	}
+	
+	printString("m: ");
+	printNum((int) mode);
+	printString("s: ");
+	printNum((int) speed);
+	printString("d: ");
+	printNum((int) direction);
+	printString("h: ");
+	printNum((int) targetHeading);
+	
+}
+
+void printString(char* str){
+	
+	while(*str != 0){
+		writeUSB(*str);
+		str++;
+	}
+	
+}
+
+// prints to USB UART the hex representation of given int
+void printNum(int num){
+	
+	char characters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	
+	// for each nibble
+	for(int i = 28; i >= 0; i -= 4){
+		int n = num >> i & 0xF;
+		writeUSB(characters[n]);
+	}
+	
+	// new line
+	writeUSB('\r');
+	writeUSB('\n');
 	
 }
 
