@@ -367,6 +367,7 @@
 #define UART0_DMACTL            (*((volatile unsigned long *)0x4000C048))
 #define UART0_9BITADDR          (*((volatile unsigned long *)0x4000C0A4))
 #define UART0_9BITAMASK         (*((volatile unsigned long *)0x4000C0A8))
+#define UART0_DOR               (*((volatile unsigned long *)0x4000C3FC))
 #define UART0_PP                (*((volatile unsigned long *)0x4000CFC0))
 #define UART0_CC                (*((volatile unsigned long *)0x4000CFC8))
 
@@ -392,6 +393,7 @@
 #define UART1_DMACTL            (*((volatile unsigned long *)0x4000D048))
 #define UART1_9BITADDR          (*((volatile unsigned long *)0x4000D0A4))
 #define UART1_9BITAMASK         (*((volatile unsigned long *)0x4000D0A8))
+#define UART1_DOR               (*((volatile unsigned long *)0x4000D3FC))
 #define UART1_PP                (*((volatile unsigned long *)0x4000DFC0))
 #define UART1_CC                (*((volatile unsigned long *)0x4000DFC8))
 
@@ -417,6 +419,7 @@
 #define UART2_DMACTL            (*((volatile unsigned long *)0x4000E048))
 #define UART2_9BITADDR          (*((volatile unsigned long *)0x4000E0A4))
 #define UART2_9BITAMASK         (*((volatile unsigned long *)0x4000E0A8))
+#define UART2_DOR               (*((volatile unsigned long *)0x4000E3FC))
 #define UART2_PP                (*((volatile unsigned long *)0x4000EFC0))
 #define UART2_CC                (*((volatile unsigned long *)0x4000EFC8))
 
@@ -442,6 +445,7 @@
 #define UART3_DMACTL            (*((volatile unsigned long *)0x4000F048))
 #define UART3_9BITADDR          (*((volatile unsigned long *)0x4000F0A4))
 #define UART3_9BITAMASK         (*((volatile unsigned long *)0x4000F0A8))
+#define UART3_DOR               (*((volatile unsigned long *)0x4000F3FC))
 #define UART3_PP                (*((volatile unsigned long *)0x4000FFC0))
 #define UART3_CC                (*((volatile unsigned long *)0x4000FFC8))
 
@@ -467,6 +471,7 @@
 #define UART4_DMACTL            (*((volatile unsigned long *)0x40010048))
 #define UART4_9BITADDR          (*((volatile unsigned long *)0x400100A4))
 #define UART4_9BITAMASK         (*((volatile unsigned long *)0x400100A8))
+#define UART4_DOR               (*((volatile unsigned long *)0x400103FC))
 #define UART4_PP                (*((volatile unsigned long *)0x40010FC0))
 #define UART4_CC                (*((volatile unsigned long *)0x40010FC8))
 
@@ -492,6 +497,7 @@
 #define UART5_DMACTL            (*((volatile unsigned long *)0x40011048))
 #define UART5_9BITADDR          (*((volatile unsigned long *)0x400110A4))
 #define UART5_9BITAMASK         (*((volatile unsigned long *)0x400110A8))
+#define UART5_DOR               (*((volatile unsigned long *)0x400113FC))
 #define UART5_PP                (*((volatile unsigned long *)0x40011FC0))
 #define UART5_CC                (*((volatile unsigned long *)0x40011FC8))
 
@@ -517,6 +523,7 @@
 #define UART6_DMACTL            (*((volatile unsigned long *)0x40012048))
 #define UART6_9BITADDR          (*((volatile unsigned long *)0x400120A4))
 #define UART6_9BITAMASK         (*((volatile unsigned long *)0x400120A8))
+#define UART6_DOR               (*((volatile unsigned long *)0x400123FC))
 #define UART6_PP                (*((volatile unsigned long *)0x40012FC0))
 #define UART6_CC                (*((volatile unsigned long *)0x40012FC8))
 
@@ -542,6 +549,7 @@
 #define UART7_DMACTL            (*((volatile unsigned long *)0x40013048))
 #define UART7_9BITADDR          (*((volatile unsigned long *)0x400130A4))
 #define UART7_9BITAMASK         (*((volatile unsigned long *)0x400130A8))
+#define UART7_DOR               (*((volatile unsigned long *)0x400133FC))
 #define UART7_PP                (*((volatile unsigned long *)0x40013FC0))
 #define UART7_CC                (*((volatile unsigned long *)0x40013FC8))
 
