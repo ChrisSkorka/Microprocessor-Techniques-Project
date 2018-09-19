@@ -392,9 +392,19 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>general.c</FileName>
+              <FileName>GPIOled.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\general.c</FilePath>
+              <FilePath>.\GPIOled.c</FilePath>
+            </File>
+            <File>
+              <FileName>TIMERsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\TIMERsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>IRcommunication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IRcommunication.c</FilePath>
             </File>
           </Files>
         </Group>

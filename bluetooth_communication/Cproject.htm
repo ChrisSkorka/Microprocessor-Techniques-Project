@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Cproject.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Cproject.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Sep 19 18:33:05 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Sep 19 21:24:50 2018
 <BR><P>
-<H3>Maximum Stack Usage =         44 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         16 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-bluetoothISR &rArr; processBluetoothCommand &rArr; printNum
+bluetoothISR &rArr; processBluetoothCommand
 <P>
 <H3>
 Functions with no stack information
@@ -156,7 +156,7 @@ Function Pointers
  <LI><a href="#[58]">WTIMER4B_Handler</a> from startup.o(.text) referenced from startup.o(RESET)
  <LI><a href="#[59]">WTIMER5A_Handler</a> from startup.o(.text) referenced from startup.o(RESET)
  <LI><a href="#[5a]">WTIMER5B_Handler</a> from startup.o(.text) referenced from startup.o(RESET)
- <LI><a href="#[12]">bluetoothISR</a> from general.o(.text) referenced from startup.o(RESET)
+ <LI><a href="#[12]">bluetoothISR</a> from btcommunication.o(.text) referenced from startup.o(RESET)
 </UL>
 <P>
 <H3>
@@ -276,8 +276,8 @@ Global Symbols
 <P><STRONG><a name="[bc]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[8b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; Delay
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; exit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -711,34 +711,45 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[8c]"></a>main</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12 + Unknown Stack Size
-<LI>Call Chain = main &rArr; Delay
+<P><STRONG><a name="[8c]"></a>main</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = main &rArr; setupBluetoothInterrupt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeUSB
+<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeUSB
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeBluetooth
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setupUARTforUSB
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setupUARTforBluetooth
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setupBluetoothInterrupt
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readBluetooth
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[95]"></a>Delay</STRONG> (Thumb, 42 bytes, Stack size 12 bytes, general.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Delay
-</UL>
-<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[92]"></a>setupUARTforUSB</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, general.o(.text))
+<P><STRONG><a name="[92]"></a>setupUARTforUSB</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, uartusb.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[93]"></a>setupUARTforBluetooth</STRONG> (Thumb, 190 bytes, Stack size 0 bytes, general.o(.text))
+<P><STRONG><a name="[bf]"></a>readUSB</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, uartusb.o(.text), UNUSED)
+
+<P><STRONG><a name="[97]"></a>writeUSB</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uartusb.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printNum
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printString
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[98]"></a>printString</STRONG> (Thumb, 22 bytes, Stack size 4 bytes, uartusb.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeUSB
+</UL>
+
+<P><STRONG><a name="[99]"></a>printNum</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, uartusb.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeUSB
+</UL>
+
+<P><STRONG><a name="[93]"></a>setupUARTforBluetooth</STRONG> (Thumb, 190 bytes, Stack size 0 bytes, uartbuetooth.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[94]"></a>setupBluetoothInterrupt</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, general.o(.text))
+<P><STRONG><a name="[94]"></a>setupBluetoothInterrupt</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, uartbuetooth.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = setupBluetoothInterrupt
 </UL>
@@ -748,58 +759,34 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[96]"></a>writeUSB</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, general.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printString
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printNum
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[95]"></a>readBluetooth</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, uartbuetooth.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetoothISR
 </UL>
 
-<P><STRONG><a name="[97]"></a>printNum</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, general.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = printNum
-</UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeUSB
-</UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processBluetoothCommand
+<P><STRONG><a name="[96]"></a>writeBluetooth</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, uartbuetooth.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[98]"></a>printString</STRONG> (Thumb, 22 bytes, Stack size 4 bytes, general.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = printString
-</UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeUSB
-</UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processBluetoothCommand
-</UL>
-
-<P><STRONG><a name="[99]"></a>processBluetoothCommand</STRONG> (Thumb, 122 bytes, Stack size 12 bytes, general.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = processBluetoothCommand &rArr; printNum
-</UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printString
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printNum
+<P><STRONG><a name="[9a]"></a>processBluetoothCommand</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, btcommunication.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = processBluetoothCommand
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetoothISR
 </UL>
 
-<P><STRONG><a name="[9a]"></a>readBluetooth</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, general.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetoothISR
+<P><STRONG><a name="[12]"></a>bluetoothISR</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, btcommunication.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = bluetoothISR &rArr; processBluetoothCommand
 </UL>
-
-<P><STRONG><a name="[12]"></a>bluetoothISR</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, general.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = bluetoothISR &rArr; processBluetoothCommand &rArr; printNum
-</UL>
-<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readBluetooth
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processBluetoothCommand
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;processBluetoothCommand
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readBluetooth
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[bf]"></a>readUSB</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, general.o(.text), UNUSED)
+<P><STRONG><a name="[c0]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[c0]"></a>writeBluetooth</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, general.o(.text), UNUSED)
+<P><STRONG><a name="[c1]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[c1]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[c2]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[c3]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+<P><STRONG><a name="[c2]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
 <P><STRONG><a name="[88]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -820,31 +807,31 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[c4]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[c3]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[9b]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[c5]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[c4]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[91]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[c6]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+<P><STRONG><a name="[c5]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[c7]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+<P><STRONG><a name="[c6]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[c8]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
+<P><STRONG><a name="[c7]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
 
 <P><STRONG><a name="[86]"></a>_fp_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
 <BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_fp_1
 </UL>
 
-<P><STRONG><a name="[c9]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P><STRONG><a name="[c8]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
 
-<P><STRONG><a name="[ca]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P><STRONG><a name="[c9]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
 <P>
 <H3>
 Local Symbols

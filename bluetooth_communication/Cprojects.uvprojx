@@ -392,9 +392,19 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>general.c</FileName>
+              <FileName>UARTusb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\general.c</FilePath>
+              <FilePath>.\UARTusb.c</FilePath>
+            </File>
+            <File>
+              <FileName>UARTbuetooth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UARTbuetooth.c</FilePath>
+            </File>
+            <File>
+              <FileName>BTcommunication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BTcommunication.c</FilePath>
             </File>
           </Files>
         </Group>

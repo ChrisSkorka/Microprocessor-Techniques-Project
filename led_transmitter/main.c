@@ -1,6 +1,5 @@
 #include "registers.h"
 
-extern void Delay(unsigned int);
 extern void setupGPIOforLED(void);
 extern void setupTimerForIR(void);
 extern void setupSysTick(void);
