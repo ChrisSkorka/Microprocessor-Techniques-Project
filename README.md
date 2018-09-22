@@ -71,6 +71,7 @@ Max bits to transmit: 174
 ###IR codes
 
 16 bit message + start/stop bit:
+
 | start | Toggle | Escape | Channel1 | Channel1 | Address | 1 | Mode | Output | D3 | D2 | D1 | D0 | L3 | L2 | L1 | L0 | stop |
 |-------|--------|--------|----------|----------|---------|---|------|-------|----|----|----|----|----|----|----|----|------|
 
@@ -204,13 +205,13 @@ ELSE
 END IF
 ```
 
-##Pin connections
+##Pin Connections and Systems
 
-| System         | FunctionID | Pins      | Mode   |
-|----------------|------------|-----------|--------|
-| Timer 1 IR LED | T0         | PB6, -PB7 | Output |
-| Timer 2        | T1         | PB4, -PB5 | Input  |
-| Timer 3        | T2         | PB0, -PB1 | Input  |
-| I2C Compass 1  | I2C0       | PB2, PB3  | IO     |
-| I2C Compass 2  | I2C1       | PA6, PA7  | IO     |
-| UART Bluetooth | U1         | PC4, PC5  | IO     |
+| System         | FunctionID | Pins          | Mode        | Interrupt |
+|----------------|------------|---------------|-------------|-----------|
+| System Timer   | SysTick    |               | Count down  |           |
+| Timer main     | T0         |               | Count down  | 0         |
+| GPIO IR LED    | GPIO B     | PB6           | Out         |           |
+| I2C Compass 1  | I2C0, GPIO | PB2, PB3, PB4 | Out, IO, In |           |
+| I2C Compass 2  | I2C1, GPIO | PA6, PA7, PB5 | Out, IO, In |           |
+| UART Bluetooth | U1         | PB0, PB1      | In, Out     | Receive   |
