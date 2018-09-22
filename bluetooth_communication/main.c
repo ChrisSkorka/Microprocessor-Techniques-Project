@@ -16,15 +16,15 @@ int main(void){
 	setupUARTforBluetooth();
 	setupBluetoothInterrupt();
 	
-	while(1){
-		char c = readBluetooth();
-		writeBluetooth(c);
-		writeUSB(c);
-//		char c = readUSB();
-//		writeUSB(c);
+//	while(1){
+//		char c = readBluetooth();
 //		writeBluetooth(c);
-	}
+//		writeUSB(c);
+////		char c = readUSB();
+////		writeUSB(c);
+////		writeBluetooth(c);
+//	}
 	
-//	while(1);
+	while(1);
 }
 

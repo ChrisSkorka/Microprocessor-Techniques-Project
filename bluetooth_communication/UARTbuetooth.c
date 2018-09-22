@@ -10,16 +10,17 @@ void setupUARTforBluetooth(void);
 void setupBluetoothInterrupt(void);
 char readBluetooth(void);
 void writeBluetooth(char c);
+void clearBluetoothInterrupt(void);
 
 // FUNCTIONS
 // ----------------------------------------------------------------------------
 
-// configure UART1 on port C pins 4 and 5
+// configure UART1 on port B pins 0 and 1
 void setupUARTforBluetooth(void){
 	
 	// enable clock for port C
-	SYSCTL_RCGCGPIO |= 0x04;
-	while((SYSCTL_PRGPIO & 0x04) != 0x04);
+	SYSCTL_RCGCGPIO |= 0x02;
+	while((SYSCTL_PRGPIO & 0x02) != 0x02);
 	
 	// enable clock for UART1
 	SYSCTL_RCGCUART |= 0x02;
@@ -41,17 +42,17 @@ void setupUARTforBluetooth(void){
 	UART1_CTL |= 0x301;
 	
 	// set GPIO alternate function select
-	GPIO_PORTC_AFSEL |= 0x30;
+	GPIO_PORTB_AFSEL |= 0x03;
 	
-	// enable pull down
-	GPIO_PORTC_PUR |= 0x30;
+	// enable pull up
+	GPIO_PORTB_PUR |= 0x01;
 	
 	// digital enable
-	GPIO_PORTC_DEN |= 0x30;
+	GPIO_PORTB_DEN |= 0x03;
 	
 	// set GPIO alternate function
-	GPIO_PORTC_PCTL &=~ 0x00FF0000;
-	GPIO_PORTC_PCTL |= 0x00220000;
+	GPIO_PORTB_PCTL &=~ 0x000000FF;
+	GPIO_PORTB_PCTL |= 0x00000011;
 	
 }
 
@@ -105,4 +106,9 @@ void writeBluetooth(char c){
 	UART1_DR &=~ 0xFF;
 	UART1_DR = c;
 	
+}
+
+// clear interrupt status
+void clearBluetoothInterrupt(void){
+	UART1_ICR |= 0x10;
 }

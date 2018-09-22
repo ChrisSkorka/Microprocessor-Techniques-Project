@@ -80,7 +80,7 @@ class Background extends CustomPainter{
     double center = top + (bottom - top) / 2;
     double indicatorPosition = center - value * (bottom - top) / 2;
 
-      // background
+      // track
     canvas.drawRRect(
       new RRect.fromLTRBR(left, top, right, bottom, new Radius.circular(5.0)), 
       new Paint()..color = new Color(0x22FFFFFF),
@@ -112,5 +112,5 @@ class Slider extends CustomPainter{
   }
 
   @override
-  bool shouldRepaint(Slider oldDelegate) => true;
+  bool shouldRepaint(Slider oldDelegate) => false;
 }

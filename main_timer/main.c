@@ -1,9 +1,11 @@
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"
+extern void setupUARTforUSB(void);
 extern void printString(char* str);
 extern void setupTimerForMain(void);
 extern void setupTimerInterrupt(void);
+extern void clearTimerInterrupt(void);
 
 // PROTOTYPES
 // ----------------------------------------------------------------------------
@@ -17,8 +19,11 @@ void mainLoop(void);
 // main
 int main(void){	  
 
+	setupUARTforUSB();
 	setupTimerForMain();
 	setupTimerInterrupt();
+	
+	printString("Ready ");
 	
 	while(1);
 }
@@ -30,7 +35,7 @@ void mainISR(void){
 	mainLoop();
 	
 	// clear interrupt status
-	// TODO
+	clearTimerInterrupt();
 	
 }
 

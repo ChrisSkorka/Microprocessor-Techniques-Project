@@ -3,6 +3,8 @@
 #include "registers.h"
 extern char readBluetooth(void);
 extern void writeBluetooth(char c);
+extern void clearBluetoothInterrupt(void);
+extern void writeUSB(char c);
 
 // PROTOTYPES
 // ----------------------------------------------------------------------------
@@ -25,9 +27,10 @@ void bluetoothISR(void){
 	// read command and process it
 	char c = readBluetooth();
 	processBluetoothCommand(c);
+	writeUSB(c);
 	
 	// clear interrupt status
-	UART1_ICR |= 0x10;
+	clearBluetoothInterrupt();
 	
 }
 
