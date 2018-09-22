@@ -18,7 +18,7 @@ void clearBluetoothInterrupt(void);
 // configure UART1 on port B pins 0 and 1
 void setupUARTforBluetooth(void){
 	
-	// enable clock for port C
+	// enable clock for port B
 	SYSCTL_RCGCGPIO |= 0x02;
 	while((SYSCTL_PRGPIO & 0x02) != 0x02);
 	
@@ -45,7 +45,7 @@ void setupUARTforBluetooth(void){
 	GPIO_PORTB_AFSEL |= 0x03;
 	
 	// enable pull up
-	GPIO_PORTB_PUR |= 0x01;
+	GPIO_PORTB_PUR |= 0x03;
 	
 	// digital enable
 	GPIO_PORTB_DEN |= 0x03;
