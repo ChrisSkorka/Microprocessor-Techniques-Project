@@ -16,6 +16,10 @@ int main(void){
 	setupUARTforBluetooth();
 	setupBluetoothInterrupt();
 	
+	writeUSB('A');
+	writeUSB('B');
+	writeUSB('C');
+	
 //	while(1){
 //		char c = readBluetooth();
 //		writeBluetooth(c);

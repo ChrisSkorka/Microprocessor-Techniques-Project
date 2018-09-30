@@ -87,6 +87,8 @@ void printString(char* str){
 // prints to USB UART the hex representation of given int
 void printNum(int num){
 	
+	printString("0x");
+	
 	char characters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 	
 	// for each nibble
@@ -96,7 +98,6 @@ void printNum(int num){
 	}
 	
 	// new line
-	writeUSB('\r');
-	writeUSB('\n');
+	// printString("\r\n");
 	
 }

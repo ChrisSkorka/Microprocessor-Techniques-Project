@@ -232,18 +232,18 @@ Image Symbol Table
     .text                                    0x0000030c   Section       88  startup.o(.text)
     $v0                                      0x0000030c   Number         0  startup.o(.text)
     .text                                    0x00000364   Section        0  main.o(.text)
-    .text                                    0x00000374   Section        0  uartusb.o(.text)
-    .text                                    0x000004cc   Section        0  uartbuetooth.o(.text)
-    .text                                    0x0000063c   Section        0  btcommunication.o(.text)
-    .text                                    0x000006ac   Section        0  heapauxi.o(.text)
-    .text                                    0x000006b2   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x000006fc   Section        0  exit.o(.text)
-    .text                                    0x00000710   Section        8  libspace.o(.text)
-    .text                                    0x00000718   Section        0  sys_exit.o(.text)
-    .text                                    0x00000724   Section        2  use_no_semi.o(.text)
-    .text                                    0x00000726   Section        0  indicate_semi.o(.text)
-    x$fpl$fpinit                             0x00000726   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x00000726   Number         0  fpinit.o(x$fpl$fpinit)
+    .text                                    0x00000388   Section        0  uartusb.o(.text)
+    .text                                    0x000004e0   Section        0  uartbuetooth.o(.text)
+    .text                                    0x00000650   Section        0  btcommunication.o(.text)
+    .text                                    0x000006c0   Section        0  heapauxi.o(.text)
+    .text                                    0x000006c6   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x00000710   Section        0  exit.o(.text)
+    .text                                    0x00000724   Section        8  libspace.o(.text)
+    .text                                    0x0000072c   Section        0  sys_exit.o(.text)
+    .text                                    0x00000738   Section        2  use_no_semi.o(.text)
+    .text                                    0x0000073a   Section        0  indicate_semi.o(.text)
+    x$fpl$fpinit                             0x0000073a   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x0000073a   Number         0  fpinit.o(x$fpl$fpinit)
     .data                                    0x20000000   Section        4  btcommunication.o(.data)
     .bss                                     0x20000004   Section       96  libspace.o(.bss)
     HEAP                                     0x20000068   Section        0  startup.o(HEAP)
@@ -461,36 +461,36 @@ Image Symbol Table
     EndCritical                              0x00000345   Thumb Code     0  startup.o(.text)
     WaitForInterrupt                         0x0000034b   Thumb Code     0  startup.o(.text)
     __user_initial_stackheap                 0x0000034f   Thumb Code     0  startup.o(.text)
-    main                                     0x00000365   Thumb Code    16  main.o(.text)
-    setupUARTforUSB                          0x00000375   Thumb Code   180  uartusb.o(.text)
-    readUSB                                  0x00000429   Thumb Code    22  uartusb.o(.text)
-    writeUSB                                 0x0000043f   Thumb Code    20  uartusb.o(.text)
-    printString                              0x00000453   Thumb Code    22  uartusb.o(.text)
-    printNum                                 0x00000469   Thumb Code    62  uartusb.o(.text)
-    setupUARTforBluetooth                    0x000004cd   Thumb Code   190  uartbuetooth.o(.text)
-    setupBluetoothInterrupt                  0x0000058b   Thumb Code    82  uartbuetooth.o(.text)
-    readBluetooth                            0x000005dd   Thumb Code    22  uartbuetooth.o(.text)
-    writeBluetooth                           0x000005f3   Thumb Code    32  uartbuetooth.o(.text)
-    clearBluetoothInterrupt                  0x00000613   Thumb Code    14  uartbuetooth.o(.text)
-    processBluetoothCommand                  0x0000063d   Thumb Code    64  btcommunication.o(.text)
-    bluetoothISR                             0x0000067d   Thumb Code    26  btcommunication.o(.text)
-    __use_two_region_memory                  0x000006ad   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x000006af   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x000006b1   Thumb Code     2  heapauxi.o(.text)
-    __user_setup_stackheap                   0x000006b3   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x000006fd   Thumb Code    18  exit.o(.text)
-    __user_libspace                          0x00000711   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x00000711   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x00000711   Thumb Code     0  libspace.o(.text)
-    _sys_exit                                0x00000719   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x00000725   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x00000725   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x00000727   Thumb Code     0  indicate_semi.o(.text)
-    _fp_init                                 0x00000727   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x0000072f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x0000072f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x00000730   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000750   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x00000365   Thumb Code    34  main.o(.text)
+    setupUARTforUSB                          0x00000389   Thumb Code   180  uartusb.o(.text)
+    readUSB                                  0x0000043d   Thumb Code    22  uartusb.o(.text)
+    writeUSB                                 0x00000453   Thumb Code    20  uartusb.o(.text)
+    printString                              0x00000467   Thumb Code    22  uartusb.o(.text)
+    printNum                                 0x0000047d   Thumb Code    62  uartusb.o(.text)
+    setupUARTforBluetooth                    0x000004e1   Thumb Code   190  uartbuetooth.o(.text)
+    setupBluetoothInterrupt                  0x0000059f   Thumb Code    82  uartbuetooth.o(.text)
+    readBluetooth                            0x000005f1   Thumb Code    22  uartbuetooth.o(.text)
+    writeBluetooth                           0x00000607   Thumb Code    32  uartbuetooth.o(.text)
+    clearBluetoothInterrupt                  0x00000627   Thumb Code    14  uartbuetooth.o(.text)
+    processBluetoothCommand                  0x00000651   Thumb Code    64  btcommunication.o(.text)
+    bluetoothISR                             0x00000691   Thumb Code    26  btcommunication.o(.text)
+    __use_two_region_memory                  0x000006c1   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x000006c3   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x000006c5   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x000006c7   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x00000711   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x00000725   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x00000725   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x00000725   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x0000072d   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x00000739   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x00000739   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x0000073b   Thumb Code     0  indicate_semi.o(.text)
+    _fp_init                                 0x0000073b   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x00000743   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x00000743   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x00000744   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000764   Number         0  anon$$obj.o(Region$$Table)
     mode                                     0x20000000   Data           1  btcommunication.o(.data)
     speed                                    0x20000001   Data           1  btcommunication.o(.data)
     direction                                0x20000002   Data           1  btcommunication.o(.data)
@@ -506,9 +506,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000030d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000754, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000768, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000750, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000764, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -561,35 +561,36 @@ Memory Map of the image
     0x00000304   0x00000304   0x00000006   Code   RO          152    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000030a   0x0000030a   0x00000002   PAD
     0x0000030c   0x0000030c   0x00000058   Code   RO            4  * .text               startup.o
-    0x00000364   0x00000364   0x00000010   Code   RO           12    .text               main.o
-    0x00000374   0x00000374   0x00000158   Code   RO           28    .text               uartusb.o
-    0x000004cc   0x000004cc   0x00000170   Code   RO           40    .text               uartbuetooth.o
-    0x0000063c   0x0000063c   0x00000070   Code   RO           52    .text               btcommunication.o
-    0x000006ac   0x000006ac   0x00000006   Code   RO           69    .text               c_w.l(heapauxi.o)
-    0x000006b2   0x000006b2   0x0000004a   Code   RO           89    .text               c_w.l(sys_stackheap_outer.o)
-    0x000006fc   0x000006fc   0x00000012   Code   RO           91    .text               c_w.l(exit.o)
-    0x0000070e   0x0000070e   0x00000002   PAD
-    0x00000710   0x00000710   0x00000008   Code   RO           99    .text               c_w.l(libspace.o)
-    0x00000718   0x00000718   0x0000000c   Code   RO          160    .text               c_w.l(sys_exit.o)
-    0x00000724   0x00000724   0x00000002   Code   RO          171    .text               c_w.l(use_no_semi.o)
-    0x00000726   0x00000726   0x00000000   Code   RO          173    .text               c_w.l(indicate_semi.o)
-    0x00000726   0x00000726   0x0000000a   Code   RO          158    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00000730   0x00000730   0x00000020   Data   RO          226    Region$$Table       anon$$obj.o
+    0x00000364   0x00000364   0x00000022   Code   RO           12    .text               main.o
+    0x00000386   0x00000386   0x00000002   PAD
+    0x00000388   0x00000388   0x00000158   Code   RO           28    .text               uartusb.o
+    0x000004e0   0x000004e0   0x00000170   Code   RO           40    .text               uartbuetooth.o
+    0x00000650   0x00000650   0x00000070   Code   RO           52    .text               btcommunication.o
+    0x000006c0   0x000006c0   0x00000006   Code   RO           69    .text               c_w.l(heapauxi.o)
+    0x000006c6   0x000006c6   0x0000004a   Code   RO           89    .text               c_w.l(sys_stackheap_outer.o)
+    0x00000710   0x00000710   0x00000012   Code   RO           91    .text               c_w.l(exit.o)
+    0x00000722   0x00000722   0x00000002   PAD
+    0x00000724   0x00000724   0x00000008   Code   RO           99    .text               c_w.l(libspace.o)
+    0x0000072c   0x0000072c   0x0000000c   Code   RO          160    .text               c_w.l(sys_exit.o)
+    0x00000738   0x00000738   0x00000002   Code   RO          171    .text               c_w.l(use_no_semi.o)
+    0x0000073a   0x0000073a   0x00000000   Code   RO          173    .text               c_w.l(indicate_semi.o)
+    0x0000073a   0x0000073a   0x0000000a   Code   RO          158    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x00000744   0x00000744   0x00000020   Data   RO          226    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000750, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000764, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000750   0x00000004   Data   RW           53    .data               btcommunication.o
+    0x20000000   0x00000764   0x00000004   Data   RW           53    .data               btcommunication.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000004, Load base: 0x00000754, Size: 0x00000464, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000004, Load base: 0x00000768, Size: 0x00000464, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000004        -       0x00000060   Zero   RW          100    .bss                c_w.l(libspace.o)
-    0x20000064   0x00000754   0x00000004   PAD
+    0x20000064   0x00000768   0x00000004   PAD
     0x20000068        -       0x00000000   Zero   RW            2    HEAP                startup.o
     0x20000068        -       0x00000400   Zero   RW            1    STACK               startup.o
 
@@ -602,15 +603,15 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        112         22          0          4          0       1296   btcommunication.o
-        16          0          0          0          0       1959   main.o
+        34          0          0          0          0       1971   main.o
        708        632          0          0       1024       1136   startup.o
        368         28          0          0          0       1461   uartbuetooth.o
        344         38          0          0          0       1612   uartusb.o
 
     ----------------------------------------------------------------------
-      1548        720         32          4       1024       7464   Object Totals
+      1568        720         32          4       1024       7476   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         0          0          0          0          0          0   (incl. Padding)
+         2          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -659,15 +660,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1840        736         32          4       1124       7408   Grand Totals
-      1840        736         32          4       1124       7408   ELF Image Totals
-      1840        736         32          4          0          0   ROM Totals
+      1860        736         32          4       1124       7420   Grand Totals
+      1860        736         32          4       1124       7420   ELF Image Totals
+      1860        736         32          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1872 (   1.83kB)
+    Total RO  Size (Code + RO Data)                 1892 (   1.85kB)
     Total RW  Size (RW Data + ZI Data)              1128 (   1.10kB)
-    Total ROM Size (Code + RO Data + RW Data)       1876 (   1.83kB)
+    Total ROM Size (Code + RO Data + RW Data)       1896 (   1.85kB)
 
 ==============================================================================
 
