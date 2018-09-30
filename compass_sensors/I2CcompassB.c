@@ -55,6 +55,20 @@ void setupI2CforCompassB(void){
 // setup compass B 
 void setupCompassB(void){
 	
+	// read to avoid errous communication produced by aborted communication previously
+	for(int i = 0; i < 3; i++){
+		
+		// set read address
+		I2C1_MSA = ADDRESS_COMPASS_B_READ;
+		
+		// start, stop  
+		I2C1_MCS = 0x07;
+		
+		// wait for data to transmit
+		while((I2C1_MCS & 0x01) == 0x01);
+		
+	}
+	
 	// set configuration: 8 samples, 15Hz
 	writeCompassB(0x00, 0xF0);
 	writeCompassB(0x01, 0x20);

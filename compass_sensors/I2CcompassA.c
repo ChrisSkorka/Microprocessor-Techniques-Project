@@ -5,7 +5,6 @@
 // PROTOTYPES
 // ----------------------------------------------------------------------------
 void setupI2CforCompassA(void);
-void setupGPIOforCompassA(void);
 void setupCompassA(void);
 char readCompassA(char address);
 void writeCompassA(char address, char data);
@@ -56,23 +55,22 @@ void setupI2CforCompassA(void){
 	// 
 }
 
-// setup GPIO for compass ready pin on port B and pin 4;
-void setupGPIOforCompassA(void){
-	
-	// enable GPIO clock
-	SYSCTL_RCGCGPIO |= 0x02;
-	while((SYSCTL_PRGPIO & 0x02) != 0x02);
-	
-	// set data direction
-	GPIO_PORTB_DIR &=~ 0x10;
-	
-	// digital enable
-	GPIO_PORTB_DEN |= 0x10;
-	
-}
-
 // setup compass A 
 void setupCompassA(void){
+	
+	// read to avoid errous communication produced by aborted communication previously
+	for(int i = 0; i < 3; i++){
+		
+		// set read address
+		I2C0_MSA = ADDRESS_COMPASS_A_READ;
+		
+		// start, stop  
+		I2C0_MCS = 0x07;
+		
+		// wait for data to transmit
+		while((I2C0_MCS & 0x01) == 0x01);
+		
+	}
 	
 	// set configuration: 8 samples, 15Hz
 	writeCompassA(0x00, 0xF0);
