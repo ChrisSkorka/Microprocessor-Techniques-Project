@@ -1,0 +1,1 @@
+.\atanlookuptable.o: atanLookUpTable.c

@@ -43,16 +43,12 @@ void setupI2CforCompassA(void){
 	// set SDA open drain
 	GPIO_PORTB_ODR |= 0x08;
 	
-	// set pull up
-	// GPIO_PORTB_PUR |= 0x0C;
-	
 	// init master
 	I2C0_MCR = 0x00000010;
 	
 	// set speed 100kbps, 7
 	I2C0_MTPR = 7;
 	
-	// 
 }
 
 // setup compass A 

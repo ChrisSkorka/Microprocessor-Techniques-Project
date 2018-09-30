@@ -406,6 +406,16 @@
               <FileType>1</FileType>
               <FilePath>.\I2CcompassB.c</FilePath>
             </File>
+            <File>
+              <FileName>CompassMeasurements.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CompassMeasurements.c</FilePath>
+            </File>
+            <File>
+              <FileName>atanLookUpTable.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\atanLookUpTable.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

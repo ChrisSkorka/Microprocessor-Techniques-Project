@@ -49,7 +49,6 @@ void setupI2CforCompassB(void){
 	// set speed 100kbps, 7
 	I2C1_MTPR = 7;
 	
-	// 
 }
 
 // setup compass B 

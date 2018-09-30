@@ -16,6 +16,17 @@ extern void setupCompassB(void);
 extern char readCompassB(char address);
 extern void writeCompassB(char address, char data);
 
+extern int getCompassAX(void);
+extern int getCompassAY(void);
+extern int getCompassAZ(void);
+extern int getCompassBX(void);
+extern int getCompassBY(void);
+extern int getCompassBZ(void);
+
+extern int getCompassAHeading(void);
+extern int getCompassBHeading(void);
+extern int getDifferenceInHeading(int A, int B, int callibration);
+
 int main(void){	  
 	
 	// setup UART for USB
@@ -32,31 +43,54 @@ int main(void){
 	setupI2CforCompassB();
 	setupCompassB();
 	
+	// calibrate alignment of sensors
+	int compassCallibration = 0;
+	for(int i = 0; i < 10; i++)
+		compassCallibration += getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0);
+	compassCallibration /= 10;
+	
+//	for(int i = -10; i <= 10; i++)
+//		printNum(i % 5);
+//	
+//	while(1);
+	
+	
 	while(1){
 //		printNum((int)(readCompassA(0)));
 		
-		int ax = readCompassA(3) << 8 | readCompassA(4);
-		int az = readCompassA(5) << 8 | readCompassA(6);
-		int ay = readCompassA(7) << 8 | readCompassA(8);
-		int bx = readCompassB(3) << 8 | readCompassB(4);
-		int bz = readCompassB(5) << 8 | readCompassB(6);
-		int by = readCompassB(7) << 8 | readCompassB(8);
+
 		
-		printString("AX: ");
-		printNum(ax);
-		printString(" AY: ");
-		printNum(ay);
-		printString(" BX: ");
-		printNum(bx);
-		printString(" BY: ");
-		printNum(by);
-		printString("\r\n");
+//		printString(" AX: ");
+//		printNum(getCompassAX());
+//		printString(" AY: ");
+//		printNum(getCompassAY());
+//		printString(" AZ: ");
+//		printNum(getCompassAZ());
+//		printString(" BX: ");
+//		printNum(getCompassBX());
+//		printString(" BY: ");
+//		printNum(getCompassBY());
+//		printString(" BZ: ");
+//		printNum(getCompassBZ());
+//		printString("\r\n");
+		
+	int a = getCompassAHeading();
+	int b = getCompassBHeading();
+	
+	printString("A: ");
+	printNum(a);
+	printString(" B: ");
+	printNum(b);
+	printString(" D: ");
+	printNum(getDifferenceInHeading(a, b, compassCallibration));
+	printString("\r\n");
+//		
 		
 //		for(int i = 0; i < 400000;i++);
-//		break;
+// 		break;
 	}
 	
 	
-//	while(1);
+// 	while(1);
 }
 
