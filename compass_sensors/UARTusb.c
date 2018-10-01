@@ -9,6 +9,7 @@ char readUSB(void);
 void writeUSB(char c);
 void printNum(int num);
 void printString(char* str);
+void printDec(int num);
 
 // FUNCTIONS
 // ----------------------------------------------------------------------------
@@ -99,5 +100,32 @@ void printNum(int num){
 	
 	// new line
 	// printString("\r\n");
+	
+}
+
+// prints to USB UART the decimal representation of a given int
+void printDec(int num){
+	
+	char characters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	
+	// if negative print - 
+	if(num < 0)
+		writeUSB('-');
+	
+	int tens = 1000000000;
+	
+	for(int index = 10; index > 0; index--){
+		
+		int digit = num / tens;
+		
+		num -= tens * digit;
+		
+		if(digit < 0)
+			digit = -digit;
+		
+		tens /= 10;
+		
+		writeUSB(characters[digit]);
+	}
 	
 }

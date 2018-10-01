@@ -19,7 +19,8 @@ int getCompassBZ(void);
 int getHeading(int x, int y);
 int getCompassAHeading(void);
 int getCompassBHeading(void);
-int getDifferenceInHeading(int A, int B, int callibration);
+int getDifferenceInHeading(int A, int B, int calibration);
+void calibrateSensors(int* calibration);
 	
 // GLOBALS
 // ----------------------------------------------------------------------------
@@ -144,9 +145,9 @@ int getCompassBHeading(void){
 }
 
 // calculate the difference in heading bewteen two headings
-int getDifferenceInHeading(int A, int B, int callibration){
+int getDifferenceInHeading(int A, int B, int calibration){
 	
-	// int difference = B - (A + callibration) % 360;
+	// int difference = B - (A + calibration) % 360;
 	int difference = B - A;
 	
 	if(difference > 180)
@@ -157,7 +158,53 @@ int getDifferenceInHeading(int A, int B, int callibration){
 	return difference;
 }
 
-
+void calibrateSensors(int* calibration){
+	
+	calibration[0] = 0;
+	calibration[1] = 0;
+	calibration[2] = 0;
+	calibration[3] = 0;
+	calibration[4] = 0;
+	calibration[5] = 0;
+	calibration[6] = 0;
+	calibration[7] = 0;
+	calibration[8] = 0;
+	calibration[9] = 0;
+	calibration[10] = 0;
+	calibration[12] = 0;
+	
+	for(int i = 0; i < 3000; i++){
+		int measurements[] = {
+			getCompassAX(),
+			getCompassAY(),
+			getCompassAZ(),
+			getCompassBX(),
+			getCompassBY(),
+			getCompassBZ()
+		};
+		
+		for(int j = 0; j < 3; j++){
+			
+			// lower bound of A
+			if(measurements[j] < calibration[2*j])
+				calibration[2*j] = measurements[j];
+			
+			// upper bound of A
+			if(measurements[j] > calibration[2*j+1])
+				calibration[2*j+1] = measurements[j];
+			
+			// lower bound of B
+			if(measurements[j+3] < calibration[2*j+6])
+				calibration[2*j+6] = measurements[j+3];
+			
+			// upper bound of B
+			if(measurements[j+3] > calibration[2*j+1+6])
+				calibration[2*j+1+6] = measurements[j+3];
+		}
+		
+	}
+	
+}
 
 
 

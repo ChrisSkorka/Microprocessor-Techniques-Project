@@ -5,6 +5,7 @@ extern char readUSB(void);
 extern void writeUSB(char c);
 extern void printNum(int num);
 extern void printString(char* str);
+extern void printDec(int num);
 
 extern void setupI2CforCompassA(void);
 extern void setupCompassA(void);
@@ -25,7 +26,8 @@ extern int getCompassBZ(void);
 
 extern int getCompassAHeading(void);
 extern int getCompassBHeading(void);
-extern int getDifferenceInHeading(int A, int B, int callibration);
+extern int getDifferenceInHeading(int A, int B, int calibration);
+extern void calibrateSensors(int* calibration);
 
 int main(void){	  
 	
@@ -44,47 +46,62 @@ int main(void){
 	setupCompassB();
 	
 	// calibrate alignment of sensors
-	int compassCallibration = 0;
+	int compassCalibration = 0;
 	for(int i = 0; i < 10; i++)
-		compassCallibration += getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0);
-	compassCallibration /= 10;
+		compassCalibration += getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0);
+	compassCalibration /= 10;
 	
 //	for(int i = -10; i <= 10; i++)
 //		printNum(i % 5);
 //	
 //	while(1);
 	
+	printString("Begin calibrations\r\n");
+	for(int i = 0; i < 8000000; i++);
+	printString("Calibrating\r\n");
+	
+	int calibration[12];
+	calibrateSensors(calibration);
+	
+	printString("Calibration finished\r\n");
+	
+	for(int i = 0; i < 12; i++){
+		printDec(i);
+		printString(": ");
+		printDec(calibration[i]);
+		printString("\r\n");
+	}
 	
 	while(1){
 //		printNum((int)(readCompassA(0)));
 		
 
 		
-//		printString(" AX: ");
-//		printNum(getCompassAX());
-//		printString(" AY: ");
-//		printNum(getCompassAY());
-//		printString(" AZ: ");
-//		printNum(getCompassAZ());
-//		printString(" BX: ");
-//		printNum(getCompassBX());
-//		printString(" BY: ");
-//		printNum(getCompassBY());
-//		printString(" BZ: ");
-//		printNum(getCompassBZ());
-//		printString("\r\n");
+		printString(" AX: ");
+		printDec(getCompassAX());
+		printString(" AY: ");
+		printDec(getCompassAY());
+		printString(" AZ: ");
+		printDec(getCompassAZ());
+		printString(" BX: ");
+		printDec(getCompassBX());
+		printString(" BY: ");
+		printDec(getCompassBY());
+		printString(" BZ: ");
+		printDec(getCompassBZ());
+		printString("\r\n");
 		
-	int a = getCompassAHeading();
-	int b = getCompassBHeading();
-	
-	printString("A: ");
-	printNum(a);
-	printString(" B: ");
-	printNum(b);
-	printString(" D: ");
-	printNum(getDifferenceInHeading(a, b, compassCallibration));
-	printString("\r\n");
-//		
+//	int a = getCompassAHeading();
+//	int b = getCompassBHeading();
+//	
+//	printString("A: ");
+//	printDec(a);
+//	printString(" B: ");
+//	printDec(b);
+//	printString(" D: ");
+//	printDec(getDifferenceInHeading(a, b, compassCalibration));
+//	printString("\r\n");
+
 		
 //		for(int i = 0; i < 400000;i++);
 // 		break;
