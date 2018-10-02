@@ -1,0 +1,27 @@
+Dependencies for Project 'Cprojects', Target 'Target 1': (DO NOT MODIFY !)
+F (.\Startup.s)(0x5BB33AE1)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 525" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\main.c)(0x5BB351A9)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (registers.h)(0x5B9A2671)
+F (.\general.c)(0x5BA23D8C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\general.o --omf_browse .\general.crf --depend .\general.d)
+I (registers.h)(0x5B9A2671)
+F (.\TIMERmain.c)(0x5BB3416F)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\timermain.o --omf_browse .\timermain.crf --depend .\timermain.d)
+I (registers.h)(0x5B9A2671)
+F (.\BTcommunication.c)(0x5BB34533)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\btcommunication.o --omf_browse .\btcommunication.crf --depend .\btcommunication.d)
+I (registers.h)(0x5B9A2671)
+F (.\UARTbluetooth.c)(0x5BB33AB0)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\uartbluetooth.o --omf_browse .\uartbluetooth.crf --depend .\uartbluetooth.d)
+I (registers.h)(0x5B9A2671)
+F (.\UARTusb.c)(0x5BB33D1A)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\uartusb.o --omf_browse .\uartusb.crf --depend .\uartusb.d)
+I (registers.h)(0x5B9A2671)
+F (.\TIMERsystem.c)(0x5BB33B94)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\timersystem.o --omf_browse .\timersystem.crf --depend .\timersystem.d)
+I (registers.h)(0x5B9A2671)
+F (.\GPIOled.c)(0x5BB33B99)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\gpioled.o --omf_browse .\gpioled.crf --depend .\gpioled.d)
+I (registers.h)(0x5B9A2671)
+F (.\IRcommunication.c)(0x5BB33B9E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\ircommunication.o --omf_browse .\ircommunication.crf --depend .\ircommunication.d)
+I (registers.h)(0x5B9A2671)
+F (.\I2CcompassA.c)(0x5BB33C6E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\i2ccompassa.o --omf_browse .\i2ccompassa.crf --depend .\i2ccompassa.d)
+I (registers.h)(0x5B9A2671)
+F (.\I2CcompassB.c)(0x5BB33C7C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\i2ccompassb.o --omf_browse .\i2ccompassb.crf --depend .\i2ccompassb.d)
+I (registers.h)(0x5B9A2671)
+F (.\atanLookupTable.c)(0x5BB33C91)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\atanlookuptable.o --omf_browse .\atanlookuptable.crf --depend .\atanlookuptable.d)
+F (.\CompassMeasurements.c)(0x5BB33CA5)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="525" -D_RTE_ -DTM4C123GH6PM-o .\compassmeasurements.o --omf_browse .\compassmeasurements.crf --depend .\compassmeasurements.d)
+I (registers.h)(0x5B9A2671)
