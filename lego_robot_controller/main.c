@@ -70,10 +70,6 @@ int mode = 0;
 // main
 int main(void){	  
 
-	// setup main timer
-	setupTimerForMain();
-	setupTimerInterrupt();
-	
 	// setup UART for USB and Bluetooth
 	setupUARTforUSB();
 	setupUARTforBluetooth();
@@ -91,6 +87,9 @@ int main(void){
 	setupI2CforCompassB();
 	setupCompassB();
 	
+	// setup main timer
+	setupTimerForMain();
+	setupTimerInterrupt();
 	
 	
 	
@@ -114,11 +113,20 @@ void mainISR(void){
 // loop run periodically
 void mainLoop(void){
 	
-	printString("Now ");
+	// printString("Now ");
 	
 	// sendIRMotorSpeed(speed, direction);
 	
+	// int difference = getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0);
 	
+	printString(" A: ");
+	printDec(getCompassAHeading());
+	printString(" B: ");
+	printDec(getCompassBHeading());
+//	printString(" D: ");
+//	printDec(getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0));
+	
+	printString("\r\n");
 	
 }
 

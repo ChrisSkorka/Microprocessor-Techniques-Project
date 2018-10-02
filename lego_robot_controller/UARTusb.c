@@ -25,6 +25,9 @@ void setupUARTforUSB(void){
 	SYSCTL_RCGCUART |= 0x01;
 	while((SYSCTL_RCGCUART & 0x01) != 0x01);
 	
+	// extra wait
+	for(int i = 0; i < 400000; i++);
+	
 	// diable UART
 	UART0_CTL &=~ 0x01;
 	

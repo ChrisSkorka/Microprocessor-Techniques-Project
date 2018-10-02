@@ -26,6 +26,9 @@ void setupUARTforBluetooth(void){
 	SYSCTL_RCGCUART |= 0x02;
 	while((SYSCTL_RCGCUART & 0x02) != 0x02);
 	
+	// extra wait
+	for(int i = 0; i < 400000; i++);
+	
 	// diable UART
 	UART1_CTL &=~ 0x01;
 	

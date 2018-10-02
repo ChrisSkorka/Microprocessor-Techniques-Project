@@ -158,6 +158,7 @@ int getDifferenceInHeading(int A, int B, int calibration){
 	return difference;
 }
 
+// find lower and upper bound of each sensor's axis'
 void calibrateSensors(int* calibration){
 	
 	calibration[0] = 0;
