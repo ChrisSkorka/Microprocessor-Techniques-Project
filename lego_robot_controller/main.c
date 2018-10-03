@@ -135,6 +135,8 @@ void mainISR(void){
 }
 
 // loop run periodically
+// measures compass orientation, compares it to the target heading, calculates 
+// motor speeds and sends the motor speeds via RI to the lego robot
 void mainLoop(void){
 	
 	// get heading and difference to target heading
