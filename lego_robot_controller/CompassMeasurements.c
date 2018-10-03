@@ -7,6 +7,8 @@ extern char readCompassB(char address);
 extern void writeCompassB(char address, char data);
 extern void printNum(int num);
 extern int inversetan(float x);
+extern void enableOnboardLED(void);
+extern void disableOnboardLED(void);
 
 // PROTOTYPES
 // ----------------------------------------------------------------------------
@@ -17,9 +19,9 @@ int getCompassBX(void);
 int getCompassBY(void);
 int getCompassBZ(void);
 int getHeading(int x, int y);
-int getCompassAHeading(void);
-int getCompassBHeading(void);
-int getDifferenceInHeading(int A, int B, int calibration);
+int getCompassAHeading(int* calibration);
+int getCompassBHeading(int* calibration);
+int getDifferenceInHeading(int A, int B);
 void calibrateSensors(int* calibration);
 	
 // GLOBALS
@@ -120,12 +122,12 @@ int getHeading(int x, int y){
 }
 
 // get heading for compass A
-int getCompassAHeading(void){
+int getCompassAHeading(int* calibration){
 	
 	// get compass readings
-	int x = getCompassAX();
-	int y = getCompassAY();
-	int z = getCompassAZ();
+	int x = getCompassAX() - calibration[0];
+	int y = getCompassAY() - calibration[1];
+	int z = getCompassAZ() - calibration[2];
 	
 	// get heading in degrees
 	return getHeading(x, y);
@@ -133,21 +135,21 @@ int getCompassAHeading(void){
 }
 
 // get heading for compass B
-int getCompassBHeading(void){
+// IMPORTANT compass B now uses x and z values
+int getCompassBHeading(int* calibration){
 	
 	// get compass readings
-	int x = getCompassBX();
-	int y = getCompassBY();
-	int z = getCompassBZ();
+	int x = getCompassBX() - calibration[0];
+	int y = getCompassBY() - calibration[1];
+	int z = getCompassBZ() - calibration[2];
 	
 	// get heading in degrees
-	return getHeading(x, y);
+	return getHeading(x, z);
 }
 
 // calculate the difference in heading bewteen two headings
-int getDifferenceInHeading(int A, int B, int calibration){
+int getDifferenceInHeading(int A, int B){
 	
-	// int difference = B - (A + calibration) % 360;
 	int difference = B - A;
 	
 	if(difference > 180)
@@ -158,23 +160,19 @@ int getDifferenceInHeading(int A, int B, int calibration){
 	return difference;
 }
 
-// find lower and upper bound of each sensor's axis'
+// find lower and upper bound of each sensor's axis' and then computes the center values to calibrate
 void calibrateSensors(int* calibration){
 	
-	calibration[0] = 0;
-	calibration[1] = 0;
-	calibration[2] = 0;
-	calibration[3] = 0;
-	calibration[4] = 0;
-	calibration[5] = 0;
-	calibration[6] = 0;
-	calibration[7] = 0;
-	calibration[8] = 0;
-	calibration[9] = 0;
-	calibration[10] = 0;
-	calibration[12] = 0;
+	// indicate start of calibration
+	enableOnboardLED();
 	
+	// init ranges
+	int range[6][2] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+	
+		// take 3000 measurements (gives a few seconds to move the sensor)
 	for(int i = 0; i < 3000; i++){
+		
+		// collect all measurements
 		int measurements[] = {
 			getCompassAX(),
 			getCompassAY(),
@@ -184,25 +182,21 @@ void calibrateSensors(int* calibration){
 			getCompassBZ()
 		};
 		
-		for(int j = 0; j < 3; j++){
-			
-			// lower bound of A
-			if(measurements[j] < calibration[2*j])
-				calibration[2*j] = measurements[j];
-			
-			// upper bound of A
-			if(measurements[j] > calibration[2*j+1])
-				calibration[2*j+1] = measurements[j];
-			
-			// lower bound of B
-			if(measurements[j+3] < calibration[2*j+6])
-				calibration[2*j+6] = measurements[j+3];
-			
-			// upper bound of B
-			if(measurements[j+3] > calibration[2*j+1+6])
-				calibration[2*j+1+6] = measurements[j+3];
+		// update lower and upper bound
+		for(int j = 0; j < 6; j++){
+			if(measurements[j] < range[j][0])
+				range[j][0] = measurements[j];
+			if(measurements[j] > range[j][1])
+				range[j][1] = measurements[j];
 		}
-		
 	}
+	
+	// compute centers of lower and upper bound for callibration
+	for(int j = 0; j < 6; j++){
+		calibration[j] = (range[j][1] + range[j][0]) / 2;
+	}
+	
+	// indicate end of calibration
+	disableOnboardLED();
 	
 }

@@ -23,8 +23,11 @@ extern void printDec(int num);
 extern void setupUARTforBluetooth(void);
 extern void setupBluetoothInterrupt(void);
 
-// GPIO ir led
+// GPIO IR LED
 extern void setupGPIOforLED(void);
+
+//GPIO onboard LED
+extern void setupGPIOforOnboardLED(void);
 
 // IR communication
 extern void sendIR(int length, int message);
@@ -46,23 +49,25 @@ extern int getCompassAZ(void);
 extern int getCompassBX(void);
 extern int getCompassBY(void);
 extern int getCompassBZ(void);
-extern int getCompassAHeading(void);
-extern int getCompassBHeading(void);
-extern int getDifferenceInHeading(int A, int B, int calibration);
+extern int getCompassAHeading(int* calibration);
+extern int getCompassBHeading(int* calibration);
+extern int getDifferenceInHeading(int A, int B);
 extern void calibrateSensors(int* calibration);
+extern int getHeading(int x, int y);
 
 // PROTOTYPES
 // ----------------------------------------------------------------------------
 int main(void);
 void mainISR(void);
 void mainLoop(void);
-void updateControlls(int m, int s, int d);
+void updateControlls(int type, int data);
 
 // GLOBALS
 // ----------------------------------------------------------------------------
 int speed = 0;
 int direction = 0;
-int mode = 0;
+int maxBend = 45;
+int centers[] = {0, 0, 0, 0, 0, 0};
 
 // FUNCTIONS
 // ----------------------------------------------------------------------------
@@ -79,6 +84,9 @@ int main(void){
 	setupGPIOforLED();
 	setupSysTick();
 	
+	// setup onboard LED
+	setupGPIOforOnboardLED();
+	
 	// setup Compass A
 	setupI2CforCompassA();
 	setupCompassA();
@@ -87,14 +95,17 @@ int main(void){
 	setupI2CforCompassB();
 	setupCompassB();
 	
-	// setup main timer
+	// calibrate compasses
+	printString("Begin calibration\r\n");
+	calibrateSensors(centers);
+	printString("Finished calibration\r\n");
+	
+	// setup main timer and periodic interrupt
 	setupTimerForMain();
 	setupTimerInterrupt();
 	
 	
-	
-	
-	printString("Ready ");
+	printString("Ready\r\n");
 	
 	while(1);
 }
@@ -115,24 +126,57 @@ void mainLoop(void){
 	
 	// printString("Now ");
 	
-	// sendIRMotorSpeed(speed, direction);
+//	int x = getCompassBX() - centers[3];
+//	int y = getCompassBY() - centers[4];
+//	int z = getCompassBZ() - centers[5];
+//	
+//	printString(" X: ");
+//	printDec(x);
+//	printString(" Y: ");
+//	printDec(y);
+//	printString(" Z: ");
+//	printDec(z);
+//	printString(" H: ");
+//	printDec(getHeading(x, z));
+//	printString("\r\n");
 	
-	// int difference = getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0);
+	// get heading and difference to target heading
+	int currentHeading = getCompassBHeading(&centers[3]);
+	int difference = getDifferenceInHeading(currentHeading, direction);
 	
-	printString(" A: ");
-	printDec(getCompassAHeading());
-	printString(" B: ");
-	printDec(getCompassBHeading());
-//	printString(" D: ");
-//	printDec(getDifferenceInHeading(getCompassAHeading(), getCompassBHeading(), 0));
-	
+	printString("H: ");
+	printDec(currentHeading);
+	printString(" D: ");
+	printDec(difference);
 	printString("\r\n");
+	
+	// limit range
+	if(difference > maxBend)
+		difference = maxBend;
+	if(difference < -maxBend)
+		difference = -maxBend;
+	
+	// calculate corresponding action
+	int directionSpeed = difference / (maxBend / 6);
+	
+	// if stationary dont turn
+	if(speed == 0)
+		directionSpeed = 0;
+	
+	// send IR commands
+	sendIRMotorSpeed(speed, directionSpeed);
 	
 }
 
 // set speed and direction
-void updateControlls(int m, int s, int d){
-	mode = m & 0xF;
-	speed = s & 0xF;
-	direction = d & 0xF;
+void updateControlls(int type, int data){
+	
+	if(type){
+		// speed
+		speed = data;
+	}else{
+		// target direction
+		direction = data;
+	}
+	
 }

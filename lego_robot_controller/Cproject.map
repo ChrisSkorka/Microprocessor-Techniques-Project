@@ -1,4 +1,4 @@
-Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
+Component: ARM Compiler 5.06 update 4 (build 422) Tool: armlink [4d35d2]
 
 ==============================================================================
 
@@ -17,13 +17,16 @@ Section Cross References
     startup.o(.text) refers to startup.o(STACK) for Stack_Mem
     main.o(.text) refers to uartusb.o(.text) for setupUARTforUSB
     main.o(.text) refers to uartbluetooth.o(.text) for setupUARTforBluetooth
-    main.o(.text) refers to gpioled.o(.text) for setupGPIOforLED
+    main.o(.text) refers to glioledir.o(.text) for setupGPIOforLED
     main.o(.text) refers to timersystem.o(.text) for setupSysTick
+    main.o(.text) refers to gpioled.o(.text) for setupGPIOforOnboardLED
     main.o(.text) refers to i2ccompassa.o(.text) for setupI2CforCompassA
     main.o(.text) refers to i2ccompassb.o(.text) for setupI2CforCompassB
+    main.o(.text) refers to compassmeasurements.o(.text) for calibrateSensors
     main.o(.text) refers to timermain.o(.text) for setupTimerForMain
-    main.o(.text) refers to compassmeasurements.o(.text) for getCompassAHeading
-    main.o(.text) refers to main.o(.data) for mode
+    main.o(.text) refers to ircommunication.o(.text) for sendIRMotorSpeed
+    main.o(.text) refers to main.o(.bss) for centers
+    main.o(.text) refers to main.o(.data) for direction
     timermain.o(.text) refers to startup.o(.text) for DisableInterrupts
     btcommunication.o(.text) refers to main.o(.text) for updateControlls
     btcommunication.o(.text) refers to uartbluetooth.o(.text) for readBluetooth
@@ -33,6 +36,8 @@ Section Cross References
     compassmeasurements.o(.text) refers to i2ccompassa.o(.text) for readCompassA
     compassmeasurements.o(.text) refers to i2ccompassb.o(.text) for readCompassB
     compassmeasurements.o(.text) refers to atanlookuptable.o(.text) for inversetan
+    compassmeasurements.o(.text) refers to gpioled.o(.text) for enableOnboardLED
+    compassmeasurements.o(.text) refers to rt_memclr_w.o(.text) for __aeabi_memclr4
     __main.o(!!!main) refers to __rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
     __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for __rt_entry_li
     __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for __rt_entry_main
@@ -136,14 +141,6 @@ Section Cross References
 
 ==============================================================================
 
-Removing Unused input sections from the image.
-
-    Removing ircommunication.o(.text), (312 bytes).
-
-1 unused section(s) (total 312 bytes) removed from the image.
-
-==============================================================================
-
 Image Symbol Table
 
     Local Symbols
@@ -151,17 +148,17 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      620  startup.o(RESET)
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/dczerorl2.s                0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
@@ -169,38 +166,40 @@ Image Symbol Table
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
     BTcommunication.c                        0x00000000   Number         0  btcommunication.o ABSOLUTE
     CompassMeasurements.c                    0x00000000   Number         0  compassmeasurements.o ABSOLUTE
+    GLIOledIR.c                              0x00000000   Number         0  glioledir.o ABSOLUTE
     GPIOled.c                                0x00000000   Number         0  gpioled.o ABSOLUTE
     I2CcompassA.c                            0x00000000   Number         0  i2ccompassa.o ABSOLUTE
     I2CcompassB.c                            0x00000000   Number         0  i2ccompassb.o ABSOLUTE
@@ -262,33 +261,37 @@ Image Symbol Table
     .text                                    0x0000034c   Section       88  startup.o(.text)
     $v0                                      0x0000034c   Number         0  startup.o(.text)
     .text                                    0x000003a4   Section        0  main.o(.text)
-    .text                                    0x00000454   Section        0  timermain.o(.text)
-    .text                                    0x00000538   Section        0  btcommunication.o(.text)
-    .text                                    0x00000598   Section        0  uartbluetooth.o(.text)
-    .text                                    0x00000718   Section        0  uartusb.o(.text)
-    .text                                    0x000008d0   Section        0  timersystem.o(.text)
-    .text                                    0x00000930   Section        0  gpioled.o(.text)
-    .text                                    0x000009cc   Section        0  i2ccompassa.o(.text)
-    .text                                    0x00000b2c   Section        0  i2ccompassb.o(.text)
-    .text                                    0x00000c8c   Section        0  atanlookuptable.o(.text)
-    .text                                    0x00000d10   Section        0  compassmeasurements.o(.text)
-    .text                                    0x00000f22   Section        0  heapauxi.o(.text)
-    .text                                    0x00000f28   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x00000f72   Section        0  exit.o(.text)
-    .text                                    0x00000f84   Section        8  libspace.o(.text)
-    .text                                    0x00000f8c   Section        0  sys_exit.o(.text)
-    .text                                    0x00000f98   Section        2  use_no_semi.o(.text)
-    .text                                    0x00000f9a   Section        0  indicate_semi.o(.text)
-    x$fpl$fpinit                             0x00000f9a   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x00000f9a   Number         0  fpinit.o(x$fpl$fpinit)
+    .text                                    0x000004d0   Section        0  timermain.o(.text)
+    .text                                    0x000005b4   Section        0  btcommunication.o(.text)
+    .text                                    0x000005ec   Section        0  uartbluetooth.o(.text)
+    .text                                    0x0000076c   Section        0  uartusb.o(.text)
+    .text                                    0x00000924   Section        0  timersystem.o(.text)
+    .text                                    0x00000984   Section        0  gpioled.o(.text)
+    .text                                    0x00000a0c   Section        0  ircommunication.o(.text)
+    .text                                    0x00000b44   Section        0  i2ccompassa.o(.text)
+    .text                                    0x00000ca4   Section        0  i2ccompassb.o(.text)
+    .text                                    0x00000e04   Section        0  atanlookuptable.o(.text)
+    .text                                    0x00000e88   Section        0  compassmeasurements.o(.text)
+    .text                                    0x00001084   Section        0  glioledir.o(.text)
+    .text                                    0x00001120   Section       78  rt_memclr_w.o(.text)
+    .text                                    0x0000116e   Section        0  heapauxi.o(.text)
+    .text                                    0x00001174   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x000011be   Section        0  exit.o(.text)
+    .text                                    0x000011d0   Section        8  libspace.o(.text)
+    .text                                    0x000011d8   Section        0  sys_exit.o(.text)
+    .text                                    0x000011e4   Section        2  use_no_semi.o(.text)
+    .text                                    0x000011e6   Section        0  indicate_semi.o(.text)
+    x$fpl$fpinit                             0x000011e6   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x000011e6   Number         0  fpinit.o(x$fpl$fpinit)
     .data                                    0x20000000   Section       12  main.o(.data)
     .data                                    0x2000000c   Section     1448  atanlookuptable.o(.data)
-    .bss                                     0x200005b4   Section       96  libspace.o(.bss)
-    HEAP                                     0x20000618   Section        0  startup.o(HEAP)
-    STACK                                    0x20000618   Section     1024  startup.o(STACK)
-    Heap_Mem                                 0x20000618   Data           0  startup.o(HEAP)
-    Stack_Mem                                0x20000618   Data        1024  startup.o(STACK)
-    __initial_sp                             0x20000a18   Data           0  startup.o(STACK)
+    .bss                                     0x200005b4   Section       24  main.o(.bss)
+    .bss                                     0x200005cc   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000630   Section        0  startup.o(HEAP)
+    STACK                                    0x20000630   Section     1024  startup.o(STACK)
+    Heap_Mem                                 0x20000630   Data           0  startup.o(HEAP)
+    Stack_Mem                                0x20000630   Data        1024  startup.o(STACK)
+    __initial_sp                             0x20000a30   Data           0  startup.o(STACK)
 
     Global Symbols
 
@@ -500,78 +503,90 @@ Image Symbol Table
     EndCritical                              0x00000385   Thumb Code     0  startup.o(.text)
     WaitForInterrupt                         0x0000038b   Thumb Code     0  startup.o(.text)
     __user_initial_stackheap                 0x0000038f   Thumb Code     0  startup.o(.text)
-    main                                     0x000003a5   Thumb Code    54  main.o(.text)
-    mainLoop                                 0x000003db   Thumb Code    42  main.o(.text)
-    mainISR                                  0x00000405   Thumb Code    12  main.o(.text)
-    updateControlls                          0x00000411   Thumb Code    28  main.o(.text)
-    setupTimerForMain                        0x00000455   Thumb Code   134  timermain.o(.text)
-    clearTimerInterrupt                      0x000004db   Thumb Code    14  timermain.o(.text)
-    setupTimerInterrupt                      0x000004e9   Thumb Code    60  timermain.o(.text)
-    processBluetoothCommand                  0x00000539   Thumb Code    68  btcommunication.o(.text)
-    bluetoothISR                             0x0000057d   Thumb Code    20  btcommunication.o(.text)
-    setupUARTforBluetooth                    0x00000599   Thumb Code   202  uartbluetooth.o(.text)
-    setupBluetoothInterrupt                  0x00000663   Thumb Code    82  uartbluetooth.o(.text)
-    readBluetooth                            0x000006b5   Thumb Code    22  uartbluetooth.o(.text)
-    writeBluetooth                           0x000006cb   Thumb Code    32  uartbluetooth.o(.text)
-    clearBluetoothInterrupt                  0x000006eb   Thumb Code    14  uartbluetooth.o(.text)
-    setupUARTforUSB                          0x00000719   Thumb Code   192  uartusb.o(.text)
-    readUSB                                  0x000007d9   Thumb Code    22  uartusb.o(.text)
-    writeUSB                                 0x000007ef   Thumb Code    20  uartusb.o(.text)
-    printString                              0x00000803   Thumb Code    22  uartusb.o(.text)
-    printNum                                 0x00000819   Thumb Code    62  uartusb.o(.text)
-    printDec                                 0x00000857   Thumb Code    64  uartusb.o(.text)
-    setupSysTick                             0x000008d1   Thumb Code    58  timersystem.o(.text)
-    wait                                     0x0000090b   Thumb Code    26  timersystem.o(.text)
-    waitUS                                   0x00000925   Thumb Code    12  timersystem.o(.text)
-    setupGPIOforLED                          0x00000931   Thumb Code    80  gpioled.o(.text)
-    disableLED                               0x00000981   Thumb Code    18  gpioled.o(.text)
-    enableLED                                0x00000993   Thumb Code    18  gpioled.o(.text)
-    setLED                                   0x000009a5   Thumb Code    18  gpioled.o(.text)
-    setupI2CforCompassA                      0x000009cd   Thumb Code   148  i2ccompassa.o(.text)
-    writeCompassA                            0x00000a61   Thumb Code    54  i2ccompassa.o(.text)
-    setupCompassA                            0x00000a97   Thumb Code    62  i2ccompassa.o(.text)
-    readCompassA                             0x00000ad5   Thumb Code    62  i2ccompassa.o(.text)
-    setupI2CforCompassB                      0x00000b2d   Thumb Code   148  i2ccompassb.o(.text)
-    writeCompassB                            0x00000bc1   Thumb Code    54  i2ccompassb.o(.text)
-    setupCompassB                            0x00000bf7   Thumb Code    62  i2ccompassb.o(.text)
-    readCompassB                             0x00000c35   Thumb Code    62  i2ccompassb.o(.text)
-    binarySearchIndex                        0x00000c8d   Thumb Code    86  atanlookuptable.o(.text)
-    inversetan                               0x00000ce3   Thumb Code    36  atanlookuptable.o(.text)
-    getCompassAX                             0x00000d11   Thumb Code    26  compassmeasurements.o(.text)
-    getCompassAY                             0x00000d2b   Thumb Code    26  compassmeasurements.o(.text)
-    getCompassAZ                             0x00000d45   Thumb Code    26  compassmeasurements.o(.text)
-    getCompassBX                             0x00000d5f   Thumb Code    26  compassmeasurements.o(.text)
-    getCompassBY                             0x00000d79   Thumb Code    26  compassmeasurements.o(.text)
-    getCompassBZ                             0x00000d93   Thumb Code    26  compassmeasurements.o(.text)
-    getHeading                               0x00000dad   Thumb Code    60  compassmeasurements.o(.text)
-    getCompassAHeading                       0x00000de9   Thumb Code    30  compassmeasurements.o(.text)
-    getCompassBHeading                       0x00000e07   Thumb Code    30  compassmeasurements.o(.text)
-    getDifferenceInHeading                   0x00000e25   Thumb Code    26  compassmeasurements.o(.text)
-    calibrateSensors                         0x00000e3f   Thumb Code   228  compassmeasurements.o(.text)
-    __use_two_region_memory                  0x00000f23   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x00000f25   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x00000f27   Thumb Code     2  heapauxi.o(.text)
-    __user_setup_stackheap                   0x00000f29   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x00000f73   Thumb Code    18  exit.o(.text)
-    __user_libspace                          0x00000f85   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x00000f85   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x00000f85   Thumb Code     0  libspace.o(.text)
-    _sys_exit                                0x00000f8d   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x00000f99   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x00000f99   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x00000f9b   Thumb Code     0  indicate_semi.o(.text)
-    _fp_init                                 0x00000f9b   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x00000fa3   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x00000fa3   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x00000fa4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000fc4   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x000003a5   Thumb Code    76  main.o(.text)
+    mainLoop                                 0x000003f1   Thumb Code   116  main.o(.text)
+    mainISR                                  0x00000465   Thumb Code    12  main.o(.text)
+    updateControlls                          0x00000471   Thumb Code    14  main.o(.text)
+    setupTimerForMain                        0x000004d1   Thumb Code   134  timermain.o(.text)
+    clearTimerInterrupt                      0x00000557   Thumb Code    14  timermain.o(.text)
+    setupTimerInterrupt                      0x00000565   Thumb Code    60  timermain.o(.text)
+    processBluetoothCommand                  0x000005b5   Thumb Code    34  btcommunication.o(.text)
+    bluetoothISR                             0x000005d7   Thumb Code    20  btcommunication.o(.text)
+    setupUARTforBluetooth                    0x000005ed   Thumb Code   202  uartbluetooth.o(.text)
+    setupBluetoothInterrupt                  0x000006b7   Thumb Code    82  uartbluetooth.o(.text)
+    readBluetooth                            0x00000709   Thumb Code    22  uartbluetooth.o(.text)
+    writeBluetooth                           0x0000071f   Thumb Code    32  uartbluetooth.o(.text)
+    clearBluetoothInterrupt                  0x0000073f   Thumb Code    14  uartbluetooth.o(.text)
+    setupUARTforUSB                          0x0000076d   Thumb Code   192  uartusb.o(.text)
+    readUSB                                  0x0000082d   Thumb Code    22  uartusb.o(.text)
+    writeUSB                                 0x00000843   Thumb Code    20  uartusb.o(.text)
+    printString                              0x00000857   Thumb Code    22  uartusb.o(.text)
+    printNum                                 0x0000086d   Thumb Code    62  uartusb.o(.text)
+    printDec                                 0x000008ab   Thumb Code    64  uartusb.o(.text)
+    setupSysTick                             0x00000925   Thumb Code    58  timersystem.o(.text)
+    wait                                     0x0000095f   Thumb Code    26  timersystem.o(.text)
+    waitUS                                   0x00000979   Thumb Code    12  timersystem.o(.text)
+    setupGPIOforOnboardLED                   0x00000985   Thumb Code    80  gpioled.o(.text)
+    enableOnboardLED                         0x000009d5   Thumb Code    18  gpioled.o(.text)
+    disableOnboardLED                        0x000009e7   Thumb Code    18  gpioled.o(.text)
+    pulseLED                                 0x00000a0d   Thumb Code    82  ircommunication.o(.text)
+    sendIR                                   0x00000a5f   Thumb Code    86  ircommunication.o(.text)
+    messagePause                             0x00000ab5   Thumb Code    60  ircommunication.o(.text)
+    sendIRMotorSpeed                         0x00000af1   Thumb Code    74  ircommunication.o(.text)
+    setupI2CforCompassA                      0x00000b45   Thumb Code   148  i2ccompassa.o(.text)
+    writeCompassA                            0x00000bd9   Thumb Code    54  i2ccompassa.o(.text)
+    setupCompassA                            0x00000c0f   Thumb Code    62  i2ccompassa.o(.text)
+    readCompassA                             0x00000c4d   Thumb Code    62  i2ccompassa.o(.text)
+    setupI2CforCompassB                      0x00000ca5   Thumb Code   148  i2ccompassb.o(.text)
+    writeCompassB                            0x00000d39   Thumb Code    54  i2ccompassb.o(.text)
+    setupCompassB                            0x00000d6f   Thumb Code    62  i2ccompassb.o(.text)
+    readCompassB                             0x00000dad   Thumb Code    62  i2ccompassb.o(.text)
+    binarySearchIndex                        0x00000e05   Thumb Code    86  atanlookuptable.o(.text)
+    inversetan                               0x00000e5b   Thumb Code    36  atanlookuptable.o(.text)
+    getCompassAX                             0x00000e89   Thumb Code    26  compassmeasurements.o(.text)
+    getCompassAY                             0x00000ea3   Thumb Code    26  compassmeasurements.o(.text)
+    getCompassAZ                             0x00000ebd   Thumb Code    26  compassmeasurements.o(.text)
+    getCompassBX                             0x00000ed7   Thumb Code    26  compassmeasurements.o(.text)
+    getCompassBY                             0x00000ef1   Thumb Code    26  compassmeasurements.o(.text)
+    getCompassBZ                             0x00000f0b   Thumb Code    26  compassmeasurements.o(.text)
+    getHeading                               0x00000f25   Thumb Code    60  compassmeasurements.o(.text)
+    getCompassAHeading                       0x00000f61   Thumb Code    42  compassmeasurements.o(.text)
+    getCompassBHeading                       0x00000f8b   Thumb Code    42  compassmeasurements.o(.text)
+    getDifferenceInHeading                   0x00000fb5   Thumb Code    24  compassmeasurements.o(.text)
+    calibrateSensors                         0x00000fcd   Thumb Code   182  compassmeasurements.o(.text)
+    setupGPIOforLED                          0x00001085   Thumb Code    80  glioledir.o(.text)
+    disableLED                               0x000010d5   Thumb Code    18  glioledir.o(.text)
+    enableLED                                0x000010e7   Thumb Code    18  glioledir.o(.text)
+    setLED                                   0x000010f9   Thumb Code    18  glioledir.o(.text)
+    __aeabi_memclr4                          0x00001121   Thumb Code     0  rt_memclr_w.o(.text)
+    __aeabi_memclr8                          0x00001121   Thumb Code     0  rt_memclr_w.o(.text)
+    __rt_memclr_w                            0x00001121   Thumb Code    78  rt_memclr_w.o(.text)
+    _memset_w                                0x00001125   Thumb Code     0  rt_memclr_w.o(.text)
+    __use_two_region_memory                  0x0000116f   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x00001171   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x00001173   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x00001175   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x000011bf   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x000011d1   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x000011d1   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x000011d1   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x000011d9   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x000011e5   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x000011e5   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x000011e7   Thumb Code     0  indicate_semi.o(.text)
+    _fp_init                                 0x000011e7   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x000011ef   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x000011ef   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x000011f0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00001210   Number         0  anon$$obj.o(Region$$Table)
     speed                                    0x20000000   Data           4  main.o(.data)
     direction                                0x20000004   Data           4  main.o(.data)
-    mode                                     0x20000008   Data           4  main.o(.data)
+    maxBend                                  0x20000008   Data           4  main.o(.data)
     ratios                                   0x2000000c   Data         724  atanlookuptable.o(.data)
     degrees                                  0x200002e0   Data         724  atanlookuptable.o(.data)
-    __libspace_start                         0x200005b4   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x20000614   Data           0  libspace.o(.bss)
+    centers                                  0x200005b4   Data          24  main.o(.bss)
+    __libspace_start                         0x200005cc   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x2000062c   Data           0  libspace.o(.bss)
 
 
 
@@ -581,99 +596,105 @@ Memory Map of the image
 
   Image Entry point : 0x0000034d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00001578, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x00001440])
+  Load Region LR_1 (Base: 0x00000000, Size: 0x000017c4, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000168c])
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000fc4, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x00001210, Max: 0xffffffff, ABSOLUTE)
 
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x00000000   0x0000026c   Code   RO            3    RESET               startup.o
-    0x0000026c   0x0000026c   0x00000008   Code   RO          176  * !!!main             c_w.l(__main.o)
-    0x00000274   0x00000274   0x00000034   Code   RO          335    !!!scatter          c_w.l(__scatter.o)
-    0x000002a8   0x000002a8   0x0000005a   Code   RO          333    !!dczerorl2         c_w.l(__dczerorl2.o)
-    0x00000302   0x00000302   0x00000002   PAD
-    0x00000304   0x00000304   0x0000001c   Code   RO          337    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x00000320   0x00000320   0x00000002   Code   RO          203    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x00000322   0x00000322   0x00000004   Code   RO          209    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          212    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          215    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          217    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          219    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          222    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          224    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          226    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          228    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          230    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          232    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          234    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          236    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          238    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          240    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          242    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          246    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          248    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          250    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000000   Code   RO          252    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x00000326   0x00000326   0x00000002   Code   RO          253    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x00000328   0x00000328   0x00000002   Code   RO          273    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0000032a   0x0000032a   0x00000000   Code   RO          286    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x0000032a   0x0000032a   0x00000000   Code   RO          288    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x0000032a   0x0000032a   0x00000000   Code   RO          291    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x0000032a   0x0000032a   0x00000000   Code   RO          294    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x0000032a   0x0000032a   0x00000000   Code   RO          296    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x0000032a   0x0000032a   0x00000000   Code   RO          299    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x0000032a   0x0000032a   0x00000002   Code   RO          300    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x0000032c   0x0000032c   0x00000000   Code   RO          178    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x0000032c   0x0000032c   0x00000000   Code   RO          180    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x0000032c   0x0000032c   0x00000006   Code   RO          192    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x00000332   0x00000332   0x00000000   Code   RO          182    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x00000332   0x00000332   0x00000004   Code   RO          183    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x00000336   0x00000336   0x00000000   Code   RO          185    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x00000336   0x00000336   0x00000008   Code   RO          186    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x0000033e   0x0000033e   0x00000002   Code   RO          207    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000340   0x00000340   0x00000000   Code   RO          255    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000340   0x00000340   0x00000004   Code   RO          256    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000344   0x00000344   0x00000006   Code   RO          257    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
-    0x0000034a   0x0000034a   0x00000002   PAD
-    0x0000034c   0x0000034c   0x00000058   Code   RO            4  * .text               startup.o
-    0x000003a4   0x000003a4   0x000000b0   Code   RO           12    .text               main.o
-    0x00000454   0x00000454   0x000000e4   Code   RO           37    .text               timermain.o
-    0x00000538   0x00000538   0x00000060   Code   RO           49    .text               btcommunication.o
-    0x00000598   0x00000598   0x00000180   Code   RO           61    .text               uartbluetooth.o
-    0x00000718   0x00000718   0x000001b8   Code   RO           73    .text               uartusb.o
-    0x000008d0   0x000008d0   0x00000060   Code   RO           85    .text               timersystem.o
-    0x00000930   0x00000930   0x0000009c   Code   RO           97    .text               gpioled.o
-    0x000009cc   0x000009cc   0x00000160   Code   RO          121    .text               i2ccompassa.o
-    0x00000b2c   0x00000b2c   0x00000160   Code   RO          133    .text               i2ccompassb.o
-    0x00000c8c   0x00000c8c   0x00000084   Code   RO          145    .text               atanlookuptable.o
-    0x00000d10   0x00000d10   0x00000212   Code   RO          160    .text               compassmeasurements.o
-    0x00000f22   0x00000f22   0x00000006   Code   RO          174    .text               c_w.l(heapauxi.o)
-    0x00000f28   0x00000f28   0x0000004a   Code   RO          194    .text               c_w.l(sys_stackheap_outer.o)
-    0x00000f72   0x00000f72   0x00000012   Code   RO          196    .text               c_w.l(exit.o)
-    0x00000f84   0x00000f84   0x00000008   Code   RO          204    .text               c_w.l(libspace.o)
-    0x00000f8c   0x00000f8c   0x0000000c   Code   RO          265    .text               c_w.l(sys_exit.o)
-    0x00000f98   0x00000f98   0x00000002   Code   RO          276    .text               c_w.l(use_no_semi.o)
-    0x00000f9a   0x00000f9a   0x00000000   Code   RO          278    .text               c_w.l(indicate_semi.o)
-    0x00000f9a   0x00000f9a   0x0000000a   Code   RO          263    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00000fa4   0x00000fa4   0x00000020   Data   RO          331    Region$$Table       anon$$obj.o
-
-
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000fc4, Size: 0x000005b4, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000047c])
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x20000000   COMPRESSED   0x0000000c   Data   RW           13    .data               main.o
-    0x2000000c   COMPRESSED   0x000005a8   Data   RW          146    .data               atanlookuptable.o
+    0x00000000   0x0000026c   Code   RO            3    RESET               startup.o
+    0x0000026c   0x00000008   Code   RO          191  * !!!main             c_w.l(__main.o)
+    0x00000274   0x00000034   Code   RO          350    !!!scatter          c_w.l(__scatter.o)
+    0x000002a8   0x0000005a   Code   RO          348    !!dczerorl2         c_w.l(__dczerorl2.o)
+    0x00000302   0x00000002   PAD
+    0x00000304   0x0000001c   Code   RO          352    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x00000320   0x00000002   Code   RO          218    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x00000322   0x00000004   Code   RO          224    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          227    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          230    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          232    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          234    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          237    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          239    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          241    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          243    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          245    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          247    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          249    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          251    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          253    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          255    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          257    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          261    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          263    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          265    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x00000326   0x00000000   Code   RO          267    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x00000326   0x00000002   Code   RO          268    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x00000328   0x00000002   Code   RO          288    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0000032a   0x00000000   Code   RO          301    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x0000032a   0x00000000   Code   RO          303    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x0000032a   0x00000000   Code   RO          306    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x0000032a   0x00000000   Code   RO          309    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x0000032a   0x00000000   Code   RO          311    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x0000032a   0x00000000   Code   RO          314    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x0000032a   0x00000002   Code   RO          315    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x0000032c   0x00000000   Code   RO          193    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x0000032c   0x00000000   Code   RO          195    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x0000032c   0x00000006   Code   RO          207    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x00000332   0x00000000   Code   RO          197    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x00000332   0x00000004   Code   RO          198    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x00000336   0x00000000   Code   RO          200    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x00000336   0x00000008   Code   RO          201    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x0000033e   0x00000002   Code   RO          222    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000340   0x00000000   Code   RO          270    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000340   0x00000004   Code   RO          271    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000344   0x00000006   Code   RO          272    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x0000034a   0x00000002   PAD
+    0x0000034c   0x00000058   Code   RO            4  * .text               startup.o
+    0x000003a4   0x0000012c   Code   RO           12    .text               main.o
+    0x000004d0   0x000000e4   Code   RO           38    .text               timermain.o
+    0x000005b4   0x00000036   Code   RO           50    .text               btcommunication.o
+    0x000005ea   0x00000002   PAD
+    0x000005ec   0x00000180   Code   RO           62    .text               uartbluetooth.o
+    0x0000076c   0x000001b8   Code   RO           74    .text               uartusb.o
+    0x00000924   0x00000060   Code   RO           86    .text               timersystem.o
+    0x00000984   0x00000088   Code   RO           98    .text               gpioled.o
+    0x00000a0c   0x00000138   Code   RO          110    .text               ircommunication.o
+    0x00000b44   0x00000160   Code   RO          122    .text               i2ccompassa.o
+    0x00000ca4   0x00000160   Code   RO          134    .text               i2ccompassb.o
+    0x00000e04   0x00000084   Code   RO          146    .text               atanlookuptable.o
+    0x00000e88   0x000001fa   Code   RO          161    .text               compassmeasurements.o
+    0x00001082   0x00000002   PAD
+    0x00001084   0x0000009c   Code   RO          173    .text               glioledir.o
+    0x00001120   0x0000004e   Code   RO          187    .text               c_w.l(rt_memclr_w.o)
+    0x0000116e   0x00000006   Code   RO          189    .text               c_w.l(heapauxi.o)
+    0x00001174   0x0000004a   Code   RO          209    .text               c_w.l(sys_stackheap_outer.o)
+    0x000011be   0x00000012   Code   RO          211    .text               c_w.l(exit.o)
+    0x000011d0   0x00000008   Code   RO          219    .text               c_w.l(libspace.o)
+    0x000011d8   0x0000000c   Code   RO          280    .text               c_w.l(sys_exit.o)
+    0x000011e4   0x00000002   Code   RO          291    .text               c_w.l(use_no_semi.o)
+    0x000011e6   0x00000000   Code   RO          293    .text               c_w.l(indicate_semi.o)
+    0x000011e6   0x0000000a   Code   RO          278    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x000011f0   0x00000020   Data   RO          346    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_ZI (Exec base: 0x200005b4, Load base: 0x00001440, Size: 0x00000464, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x000005b4, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000047c])
 
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x200005b4        -       0x00000060   Zero   RW          205    .bss                c_w.l(libspace.o)
-    0x20000614   0x00001440   0x00000004   PAD
-    0x20000618        -       0x00000000   Zero   RW            2    HEAP                startup.o
-    0x20000618        -       0x00000400   Zero   RW            1    STACK               startup.o
+    0x20000000   0x0000000c   Data   RW           14    .data               main.o
+    0x2000000c   0x000005a8   Data   RW          147    .data               atanlookuptable.o
+
+
+    Execution Region ER_ZI (Base: 0x200005b4, Size: 0x0000047c, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x200005b4   0x00000018   Zero   RW           13    .bss                main.o
+    0x200005cc   0x00000060   Zero   RW          220    .bss                c_w.l(libspace.o)
+    0x2000062c   0x00000004   PAD
+    0x20000630   0x00000000   Zero   RW            2    HEAP                startup.o
+    0x20000630   0x00000400   Zero   RW            1    STACK               startup.o
 
 
 ==============================================================================
@@ -683,23 +704,25 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       132         10          0       1448          0       1748   atanlookuptable.o
-        96          8          0          0          0        947   btcommunication.o
-       530          0          0          0          0       2913   compassmeasurements.o
-       156         22          0          0          0       1002   gpioled.o
-       352         26          0          0          0       1447   i2ccompassa.o
-       352         26          0          0          0       1447   i2ccompassb.o
-       176         40          0         12          0       2883   main.o
-       708        632          0          0       1024       1136   startup.o
-       228         20          0          0          0        928   timermain.o
-        96          0          0          0          0       1023   timersystem.o
-       384         32          0          0          0       1525   uartbluetooth.o
-       440         58          0          0          0       2013   uartusb.o
+       132         10          0       1448          0       1800   atanlookuptable.o
+        54          0          0          0          0        831   btcommunication.o
+       506          0          0          0          0       3013   compassmeasurements.o
+       156         22          0          0          0       1026   glioledir.o
+       136         20          0          0          0        884   gpioled.o
+       352         26          0          0          0       1463   i2ccompassa.o
+       352         26          0          0          0       1463   i2ccompassb.o
+       312         10          0          0          0       1932   ircommunication.o
+       300         82          0         12         24       3366   main.o
+       708        632          0          0       1024       1168   startup.o
+       228         20          0          0          0        944   timermain.o
+        96          0          0          0          0       1039   timersystem.o
+       384         32          0          0          0       1541   uartbluetooth.o
+       440         58          0          0          0       2029   uartusb.o
 
     ----------------------------------------------------------------------
-      3650        874         32       1460       1024      19012   Object Totals
+      4160        938         32       1460       1048      22499   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         0          0          0          0          0          0   (incl. Padding)
+         4          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -720,6 +743,7 @@ Image component sizes
          2          0          0          0          0          0   libshutdown.o
          2          0          0          0          0          0   libshutdown2.o
          8          4          0          0         96         68   libspace.o
+        78          0          0          0          0         80   rt_memclr_w.o
          2          0          0          0          0          0   rtexit.o
         10          0          0          0          0          0   rtexit2.o
         12          4          0          0          0         68   sys_exit.o
@@ -728,18 +752,18 @@ Image component sizes
         10          0          0          0          0        116   fpinit.o
 
     ----------------------------------------------------------------------
-       354         16          0          0        100        700   Library Totals
+       432         16          0          0        100        780   Library Totals
          4          0          0          0          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
-       340         16          0          0         96        584   c_w.l
+       418         16          0          0         96        664   c_w.l
         10          0          0          0          0        116   fz_wm.l
 
     ----------------------------------------------------------------------
-       354         16          0          0        100        700   Library Totals
+       432         16          0          0        100        780   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -748,15 +772,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4004        890         32       1460       1124      17356   Grand Totals
-      4004        890         32       1148       1124      17356   ELF Image Totals (compressed)
-      4004        890         32       1148          0          0   ROM Totals
+      4592        954         32       1460       1148      20571   Grand Totals
+      4592        954         32       1148       1148      20571   ELF Image Totals (compressed)
+      4592        954         32       1148          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 4036 (   3.94kB)
-    Total RW  Size (RW Data + ZI Data)              2584 (   2.52kB)
-    Total ROM Size (Code + RO Data + RW Data)       5184 (   5.06kB)
+    Total RO  Size (Code + RO Data)                 4624 (   4.52kB)
+    Total RW  Size (RW Data + ZI Data)              2608 (   2.55kB)
+    Total ROM Size (Code + RO Data + RW Data)       5772 (   5.64kB)
 
 ==============================================================================
 

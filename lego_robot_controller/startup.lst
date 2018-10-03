@@ -1019,9 +1019,9 @@ ARM Macro Assembler    Page 16
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=.\startup.d -o.\startup.o -I.\RTE\_Target_1 -IC:\Keil_v5\ARM\PA
-CK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Devi
+CK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Devi
 ce\Include\TM4C123 --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION S
-ETA 525" --predefine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA 1" --list=.\
+ETA 523" --predefine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA 1" --list=.\
 startup.lst Startup.s
 
 
