@@ -1,4 +1,11 @@
-// INCLUDE
+// ----------------------------------------------------------------------------
+// 
+// atanLookupTable.c
+// 
+// provides a lookup table for atan functions accurate to 1 degree
+// it performs binary search on the ratios array and returns the corresponding
+// degree value
+// 
 // ----------------------------------------------------------------------------
 
 // PROTOTYPES
@@ -10,6 +17,7 @@ int binarySearchIndex(int start, int length, float value);
 // ----------------------------------------------------------------------------
 #define size 181
 
+// map from y/x (ratio) to degrees
 float ratios[] = {
   -1.633123935319537e+16,
   -57.289961630759144,
@@ -388,7 +396,7 @@ int inversetan(float x){
 	return degrees[index];
 }
 
-// binary search for value in ratios and return index
+// binary search for value in ratios and returns index
 int binarySearchIndex(int start, int length, float value){
 	
 	// base case

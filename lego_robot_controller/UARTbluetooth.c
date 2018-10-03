@@ -1,3 +1,13 @@
+// ----------------------------------------------------------------------------
+// 
+// UARTbluetooth.c
+// 
+// sets up the UART subsystem for bluetooth and interrupt on receive of data
+// provides read and write to the bluetooth serial stream
+// requires bluetoothISR() to be the UART1_Handler in Startup.s
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"

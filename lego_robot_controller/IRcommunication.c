@@ -1,3 +1,12 @@
+// ----------------------------------------------------------------------------
+// 
+// IRcommunication.c
+// 
+// provides methods to transmit instructions to the Lego power functions
+// receiver, utilizes the Systick timer through TIMERsystems for timing
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"
@@ -5,10 +14,11 @@ extern void waitUS(int us);
 
 // PROTOTYPES
 // ----------------------------------------------------------------------------
-void sendIR(int length, int message);
-void sendIRMotorSpeed(int motor, int speed);
 void pulseLED(int activeUS, int inactiveUS);
 void messagePause(int channel, int count);
+void sendIR(int length, int message);
+
+void sendIRMotorSpeed(int motor, int speed);
 
 // FUNCTIONS
 // ----------------------------------------------------------------------------

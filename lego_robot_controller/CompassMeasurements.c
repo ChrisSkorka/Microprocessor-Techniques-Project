@@ -1,3 +1,14 @@
+// ----------------------------------------------------------------------------
+// 
+// CompassMeasurements.c
+// 
+// includes methods to read measurements from the compass sensors and calculate
+// the heading in degrees
+// provides methods to get the headings of each compass, calculate the
+// difference in heading bewteen two values and calibration for the sensors
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"
@@ -19,10 +30,12 @@ int getCompassBX(void);
 int getCompassBY(void);
 int getCompassBZ(void);
 int getHeading(int x, int y);
+
 int getCompassAHeading(int* calibration);
 int getCompassBHeading(int* calibration);
 int getDifferenceInHeading(int A, int B);
 void calibrateSensors(int* calibration);
+void calibrateCompassB(int* calibration);
 	
 // GLOBALS
 // ----------------------------------------------------------------------------
@@ -193,6 +206,44 @@ void calibrateSensors(int* calibration){
 	
 	// compute centers of lower and upper bound for callibration
 	for(int j = 0; j < 6; j++){
+		calibration[j] = (range[j][1] + range[j][0]) / 2;
+	}
+	
+	// indicate end of calibration
+	disableOnboardLED();
+	
+}
+
+// find lower and upper bound of each axis' and then computes the center values to calibrate
+void calibrateCompassB(int* calibration){
+	
+	// indicate start of calibration
+	enableOnboardLED();
+	
+	// init ranges
+	int range[3][2] = {{0, 0}, {0, 0}, {0, 0}};
+	
+		// take 3000 measurements (gives a few seconds to move the sensor)
+	for(int i = 0; i < 3000; i++){
+		
+		// collect all measurements
+		int measurements[] = {
+			getCompassBX(),
+			getCompassBY(),
+			getCompassBZ()
+		};
+		
+		// update lower and upper bound
+		for(int j = 0; j < 3; j++){
+			if(measurements[j] < range[j][0])
+				range[j][0] = measurements[j];
+			if(measurements[j] > range[j][1])
+				range[j][1] = measurements[j];
+		}
+	}
+	
+	// compute centers of lower and upper bound for callibration
+	for(int j = 0; j < 3; j++){
 		calibration[j] = (range[j][1] + range[j][0]) / 2;
 	}
 	

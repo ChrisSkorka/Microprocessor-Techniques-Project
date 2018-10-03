@@ -1,3 +1,12 @@
+// ----------------------------------------------------------------------------
+// 
+// I2CcompassB.c
+// 
+// sets up the I2C for compass B and configures the compass itself, 
+// provides methods to read and write to memory address on the compass device
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"

@@ -1,3 +1,12 @@
+// ----------------------------------------------------------------------------
+// 
+// BTcommunication.c
+// 
+// uses the UART functions and interrupt to process each incoming command
+// each command either sets the speed or target direction
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"
@@ -9,9 +18,10 @@ extern void updateControlls(int type, int data);
 
 // PROTOTYPES
 // ----------------------------------------------------------------------------
-void bluetoothISR(void);
 void decode(void);
 void processBluetoothCommand(char command);
+
+void bluetoothISR(void);
 
 // GLOBAL VARIABLES
 // ----------------------------------------------------------------------------
@@ -47,7 +57,8 @@ void processBluetoothCommand(char command){
 		// target heading
 		updateControlls(type, command & 0x7F);
 	}
-	
+
+// NOTE: the following code was intended for the old modes of the original design
 //	if(mode == 0){
 //		// if direct mode
 //		

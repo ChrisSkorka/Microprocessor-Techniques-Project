@@ -451,6 +451,11 @@
               <FileType>1</FileType>
               <FilePath>.\CompassMeasurements.c</FilePath>
             </File>
+            <File>
+              <FileName>GPIOledIR.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GPIOledIR.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

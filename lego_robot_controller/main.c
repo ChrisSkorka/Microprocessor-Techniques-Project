@@ -1,3 +1,14 @@
+// ----------------------------------------------------------------------------
+// 
+// main.c
+// 
+// sets up all subsystems, calibrates the compass and starts periodic interrupt 
+// for the main loop
+// in each periodic interrupt it measures the compass values and canculates the
+// required motor speeds and transmits them to the robot via IR
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"
@@ -53,6 +64,7 @@ extern int getCompassAHeading(int* calibration);
 extern int getCompassBHeading(int* calibration);
 extern int getDifferenceInHeading(int A, int B);
 extern void calibrateSensors(int* calibration);
+extern void calibrateCompassB(int* calibration);
 extern int getHeading(int x, int y);
 
 // PROTOTYPES
@@ -67,7 +79,7 @@ void updateControlls(int type, int data);
 int speed = 0;
 int direction = 0;
 int maxBend = 45;
-int centers[] = {0, 0, 0, 0, 0, 0};
+int centersB[] = {0, 0, 0};
 
 // FUNCTIONS
 // ----------------------------------------------------------------------------
@@ -87,9 +99,10 @@ int main(void){
 	// setup onboard LED
 	setupGPIOforOnboardLED();
 	
-	// setup Compass A
-	setupI2CforCompassA();
-	setupCompassA();
+// NOTE: the following code was intended for the old modes of the original design
+//	// setup Compass A
+//	setupI2CforCompassA();
+//	setupCompassA();
 	
 	// setup Compass B
 	setupI2CforCompassB();
@@ -97,7 +110,7 @@ int main(void){
 	
 	// calibrate compasses
 	printString("Begin calibration\r\n");
-	calibrateSensors(centers);
+	calibrateCompassB(centersB);
 	printString("Finished calibration\r\n");
 	
 	// setup main timer and periodic interrupt
@@ -124,24 +137,8 @@ void mainISR(void){
 // loop run periodically
 void mainLoop(void){
 	
-	// printString("Now ");
-	
-//	int x = getCompassBX() - centers[3];
-//	int y = getCompassBY() - centers[4];
-//	int z = getCompassBZ() - centers[5];
-//	
-//	printString(" X: ");
-//	printDec(x);
-//	printString(" Y: ");
-//	printDec(y);
-//	printString(" Z: ");
-//	printDec(z);
-//	printString(" H: ");
-//	printDec(getHeading(x, z));
-//	printString("\r\n");
-	
 	// get heading and difference to target heading
-	int currentHeading = getCompassBHeading(&centers[3]);
+	int currentHeading = getCompassBHeading(centersB);
 	int difference = getDifferenceInHeading(currentHeading, direction);
 	
 	printString("H: ");
@@ -176,7 +173,7 @@ void updateControlls(int type, int data){
 		speed = data;
 	}else{
 		// target direction
-		direction = data;
+		direction = data * 3;
 	}
 	
 }

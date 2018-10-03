@@ -1,3 +1,13 @@
+// ----------------------------------------------------------------------------
+// 
+// TIMERsystem.c
+// 
+// sets up SysTick Timer for short delays, used by the IR signal generation
+// provides wait and waitUS methods to wait a given number of system ticks or
+// micro seconds respecively
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"

@@ -1,3 +1,13 @@
+// ----------------------------------------------------------------------------
+// 
+// UARTusb.c
+// 
+// sets up the UART subsystem for USB communication for debug purposes
+// provides read and write to the USB serial stream as well as methods to print
+// string, hex and signed decimal integers
+// 
+// ----------------------------------------------------------------------------
+
 // INCLUDE
 // ----------------------------------------------------------------------------
 #include "registers.h"
